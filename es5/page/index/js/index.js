@@ -1,12 +1,16 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _regenerator = require("babel-runtime/regenerator");
+var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
+
+var _swiper = require('swiper');
+
+var _swiper2 = _interopRequireDefault(_swiper);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30,7 +34,7 @@ exports.default = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-            case "end":
+            case 'end':
               return _context.stop();
           }
         }
@@ -53,7 +57,17 @@ exports.default = {
   watch: {},
   beforeCreate: function beforeCreate() {},
   created: function created() {},
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var swiper = new _swiper2.default(this.$refs.categoryBar, {
+      slidesPerView: 4,
+      spaceBetween: 30,
+      centeredSlides: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      }
+    });
+  },
 
   methods: {},
   filters: {}

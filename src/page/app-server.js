@@ -19,7 +19,6 @@ export default context => new Promise((resolve, reject) => {
 
   // 等到 router 将可能的异步组件和钩子函数解析完
   app.$router.onReady(() => {
-
     const Coms = app.$router.getMatchedComponents();
 
     // 匹配不到路由404
@@ -37,14 +36,13 @@ export default context => new Promise((resolve, reject) => {
         });
       }
     })).then(() => {
-
       // 设置渲染变量
       context.state = app.$store.state;
       context.title = app.$router.currentRoute.meta.title;
 
       resolve(app);
     }).catch(reject);
-  }, ()=>{
-    reject();
+  }, () => {
+    reject(new Error('路由onReady失败'));
   });
 });

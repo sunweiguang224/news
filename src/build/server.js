@@ -105,7 +105,6 @@ if (!config.env.env) {
 }
 
 
-
 // // post请求body解析，application/x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -140,7 +139,7 @@ app.use(invalidRouter);
 
 // 注册通用级get路由
 let allGetRouter = express.Router();
-allGetRouter.get('*', (req, res, next) => {
+allGetRouter.get(['/*.html', '/'], (req, res, next) => {
 
   console.log(`express收到请求`, {req});
 
@@ -209,6 +208,9 @@ allGetRouter.get('*', (req, res, next) => {
 
 });
 app.use(allGetRouter);
+
+// 静态文件
+app.use(express.static('dist'));
 
 
 /*// 注册通用级post路由作为借口代理，开发模式独有

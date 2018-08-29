@@ -13,8 +13,9 @@
     "htmllint": "htmllint src/page/center/center.vue",
     "create": "gulp task_create",
     "compile": "babel src -d es5 -w",
+    "dll": "babel src -d es5; webpack --config es5/build/webpack.dll.config.js; mini=true webpack --config es5/build/webpack.dll.config.js;",
     "server": "webpack --config es5/build/webpack.server.config.js --progress --color",
-    "client": "webpack --config es5/build/webpack.client.config.js --progress --color",
+    "client": "npm run dll; webpack --config es5/build/webpack.client.config.js --progress --color",
     "start": "webpack --config es5/build/webpack.server.config.js; webpack --config es5/build/webpack.client.config.js",
     "service": "node ./es5/build/server.js"
   },
@@ -50,6 +51,7 @@
     "express-favicon": "2.0.1",
     "file-loader": "1.1.6",
     "html-minifier": "3.5.16",
+    "htmllint-loader": "^2.1.4",
     "http-proxy-middleware": "0.18.0",
     "inquirer": "4.0.1",
     "jquery": "3.2.0",

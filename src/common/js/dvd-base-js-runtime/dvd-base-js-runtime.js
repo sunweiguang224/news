@@ -5,23 +5,23 @@
 export default {
   /**
    * 是否是server端（server端包括NodeJS）
-   * @returns {Boolean}
+   * @returns {Boolean} 布尔
    */
-  isServer() {
+  isServer () {
     return typeof global !== 'undefined' && typeof global.process !== 'undefined';
   },
   /**
    * 是否是client端（client端包括浏览器、微信、app）
-   * @returns {Boolean}
+   * @returns {Boolean} 布尔
    */
-  isClient() {
+  isClient () {
     return !this.isServer();
   },
   /**
    * 当前程序是否在Linux服务器上运行
-   * @returns {Boolean}
+   * @returns {Boolean} 布尔
    */
-  isLinux() {
+  isLinux () {
     return typeof global !== 'undefined' && global.process && global.process.platform === 'linux';
   },
 };

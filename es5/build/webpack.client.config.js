@@ -47,13 +47,11 @@ var _util2 = _interopRequireDefault(_util);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // 复制文件
-
+// util.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.js', 'dist/static/common/js/vendor.dll.js');
+// util.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.min.js', 'dist/static/common/js/vendor.dll.min.js');
 
 // 自定义
 // 第三方
-_util2.default.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.js', 'dist/static/common/js/vendor.dll.js');
-_util2.default.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.min.js', 'dist/static/common/js/vendor.dll.min.js');
-
 var json = (0, _webpackMerge2.default)(require('./webpack.base.config').default, {
   entry: {
     'page/app-client': './src/page/app-client.js'
@@ -103,8 +101,8 @@ var json = (0, _webpackMerge2.default)(require('./webpack.base.config').default,
     }
 
     // 读取dll信息
-    var dllJsonPath = _config2.default.env.env ? './dll/vendor.dll.min.json' : './dll/vendor.dll.json';
-    var dllJson = require(dllJsonPath);
+    var dllJsonPath = _config2.default.env.env ? 'dist/static/common/js/dll/vendor.dll.min.json' : 'dist/static/common/js/dll/vendor.dll.json';
+    var dllJson = require(_path2.default.resolve(dllJsonPath));
     // console.log(`dllJson(${dllJsonPath})内容如下: `);
     // console.log(JSON.stringify(dllJson, ' ', 2));
 

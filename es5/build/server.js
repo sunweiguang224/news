@@ -191,7 +191,7 @@ app.use(invalidRouter);
 
 // 注册通用级get路由
 var allGetRouter = _express2.default.Router();
-allGetRouter.get('*', function (req, res, next) {
+allGetRouter.get(['/*.html', '/'], function (req, res, next) {
 
   _dvdServiceJsConsole2.default.log('express\u6536\u5230\u8BF7\u6C42', { req: req });
 
@@ -254,6 +254,9 @@ allGetRouter.get('*', function (req, res, next) {
    });*/
 });
 app.use(allGetRouter);
+
+// 静态文件
+app.use(_express2.default.static('dist'));
 
 /*// 注册通用级post路由作为借口代理，开发模式独有
  if(!config.env.env) {

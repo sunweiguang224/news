@@ -82,13 +82,14 @@ let replacer = {
     }
   })(),
   '[[static]]': (function () {
-    if (env.env == 'dev') {
-      return `//fe.bravetime.net/${pkg.name}/static${env.num}/dist/static`;
-    } else if (env.env == 'beta' || env.env == 'pt') {
-      return `//fe.vyohui.cn/${pkg.name}/static${env.num}/dist/static`;
-    } else {
-      return `//5e.dvmama.com/${pkg.name}/static${env.num}/dist/static`;
-    }
+    // if (env.env == 'dev') {
+    //   return `//fe.bravetime.net/${pkg.name}/static${env.num}/dist/static`;
+    // } else if (env.env == 'beta' || env.env == 'pt') {
+    //   return `//fe.vyohui.cn/${pkg.name}/static${env.num}/dist/static`;
+    // } else {
+    //   return `//5e.dvmama.com/${pkg.name}/static${env.num}/dist/static`;
+    // }
+    return `/static`;
   })(),
   '[[vendor]]': '//3n.dvmama.com',
   '[[v]]': env.mini ? `` : `?v=${util.getTimeFormatVersion()}`,

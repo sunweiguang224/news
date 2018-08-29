@@ -15,7 +15,6 @@ let dll = {
     // 'style-loader',
     // 'vue-style-loader',
     'scriptjs',
-    'vuex',
     'vue-router',
     'swiper',
   ],
@@ -41,7 +40,7 @@ let dll = {
 // 是否打包压缩的dll
 let isMini = process.env.mini === 'true';
 
-let dllJsonPath = path.join(__dirname, "../dist/dll", '[name].dll' + (isMini ? '.min' : '') + '.json');
+let dllJsonPath = path.join(path.resolve('dist/static/common/js/dll'), '[name].dll' + (isMini ? '.min' : '') + '.json');
 console.log(`dllJsonPath(${dllJsonPath.replace('[name]', 'vendor')})内容如下: `);
 // console.log(JSON.stringify(require(dllJsonPath.replace('[name]', 'vendor')), ' ', 2));
 
@@ -50,7 +49,7 @@ let json = {
     vendor: dll.list,
   },
   output: {
-    path: path.join(__dirname, "../dist/dll"),
+    path: path.resolve('dist/static/common/js/dll'),
     filename: '[name].dll' + (isMini ? '.min' : '') + '.js',
     library: "[name]_factory",  // 暴露的工厂函数名称
   },
@@ -58,7 +57,7 @@ let json = {
     var plugins = [
       new webpack.DllPlugin({
         // context: __dirname,
-        context: `${__dirname}/../`,
+        context: path.resolve('dist/static/common/js/dll'),
         path: dllJsonPath,  // 清单json文件的绝对路径
         name: "[name]_factory",   // 暴露的dll函数的名称
       }),

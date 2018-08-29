@@ -13,8 +13,8 @@ import config from './config.js';
 import util from './util.js';
 
 // 复制文件
-util.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.js', 'dist/static/common/js/vendor.dll.js');
-util.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.min.js', 'dist/static/common/js/vendor.dll.min.js');
+// util.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.js', 'dist/static/common/js/vendor.dll.js');
+// util.copyFile('node_modules/dvd-base-build-node-ssr/dist/dll/vendor.dll.min.js', 'dist/static/common/js/vendor.dll.min.js');
 
 let json = merge(require('./webpack.base.config').default, {
   entry: {
@@ -65,8 +65,8 @@ let json = merge(require('./webpack.base.config').default, {
     }
 
     // 读取dll信息
-    let dllJsonPath = config.env.env ? `./dll/vendor.dll.min.json` : `./dll/vendor.dll.json`;
-    let dllJson = require(dllJsonPath);
+    let dllJsonPath = config.env.env ? `dist/static/common/js/dll/vendor.dll.min.json` : `dist/static/common/js/dll/vendor.dll.json`;
+    let dllJson = require(path.resolve(dllJsonPath));
     // console.log(`dllJson(${dllJsonPath})内容如下: `);
     // console.log(JSON.stringify(dllJson, ' ', 2));
 

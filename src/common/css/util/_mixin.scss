@@ -185,3 +185,8 @@
     transform: scaleY(0.5);
   }
 }
+
+@mixin full-width(){
+  width: 100%;
+  max-width: $pageMaxWidth;
+}

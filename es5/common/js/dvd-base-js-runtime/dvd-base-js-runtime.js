@@ -10,7 +10,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {
   /**
    * 是否是server端（server端包括NodeJS）
-   * @returns {Boolean}
+   * @returns {Boolean} 布尔
    */
   isServer: function isServer() {
     return typeof global !== 'undefined' && typeof global.process !== 'undefined';
@@ -18,7 +18,7 @@ exports.default = {
 
   /**
    * 是否是client端（client端包括浏览器、微信、app）
-   * @returns {Boolean}
+   * @returns {Boolean} 布尔
    */
   isClient: function isClient() {
     return !this.isServer();
@@ -26,7 +26,7 @@ exports.default = {
 
   /**
    * 当前程序是否在Linux服务器上运行
-   * @returns {Boolean}
+   * @returns {Boolean} 布尔
    */
   isLinux: function isLinux() {
     return typeof global !== 'undefined' && global.process && global.process.platform === 'linux';

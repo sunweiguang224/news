@@ -1,3 +1,27 @@
 @import "../../../common/css/util";
 @import "../../../common/css/common";
+@import "../../../../node_modules/swiper/dist/css/swiper";
 
+.app > .page.index {
+
+  $title-bar-height: r(40);
+
+  .title-bar {
+    position: fixed;
+    top: 0;
+
+    @include height($title-bar-height);
+    @include full-width;
+
+    background: $color-subject;
+    text-align: center;
+    font-size: r(16);
+    color: white;
+  }
+
+  .category-bar {
+    position: fixed;
+    top: $title-bar-height;
+  }
+
+}
