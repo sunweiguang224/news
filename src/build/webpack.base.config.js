@@ -126,7 +126,12 @@ let json = {
     alias: {
       // 本地开发使用开发版严格校验，发布到公共环境时使用压缩版避免严格校验产生的报错（严格校验促进更优秀的代码质量）
       vue: !config.env.env ? 'vue/dist/vue.js' : 'vue/dist/vue.min.js',
-      'dvd-base-js-runtime': '../../src/common/js/dvd-base-js-runtime/dvd-base-js-runtime.js',
+      'runtime': path.resolve('src/common/js/dvd-base-js-runtime/dvd-base-js-runtime.js'),
+      'ajax': path.resolve('src/common/js/dvd-service-js-ajax/dvd-service-js-ajax.js'),
+      'date': path.resolve('src/common/js/dvd-base-js-date/dvd-base-js-date.js'),
+      'number': path.resolve('src/common/js/dvd-base-js-number/dvd-base-js-number.js'),
+      'type': path.resolve('src/common/js/dvd-base-js-type/dvd-base-js-type.js'),
+      'console': path.resolve('src/common/js/dvd-service-js-console/dvd-service-js-console.js'),
     }
   },
 };

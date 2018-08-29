@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import lazyload from 'vue-lazyload';
-import runtime from 'dvd-base-js-runtime';
+import runtime from 'runtime';
 
 Vue.use(Router);
 Vue.use(lazyload);
@@ -15,7 +15,7 @@ export default {
           path: '/index.html',
           alias: ['/'],
           meta: {
-            title: '首页',
+            title: '天天想看',
           },
           component: () => import(/* webpackChunkName: "page/index/js/index" */'./index/index.vue'),
           beforeEnter (to, from, next) {

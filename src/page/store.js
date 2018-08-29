@@ -7,7 +7,7 @@ export default {
   create () {
     return new Vuex.Store({
       modules: {
-        // center: require('./index/js/store.js').default,
+        index: require('./index/js/store.js').default,
       },
     });
   },

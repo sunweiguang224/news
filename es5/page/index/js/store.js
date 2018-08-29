@@ -8,9 +8,13 @@ var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
 
-var _dvdServiceJsAjax = require('dvd-service-js-ajax');
+var _ajax = require('ajax');
 
-var _dvdServiceJsAjax2 = _interopRequireDefault(_dvdServiceJsAjax);
+var _ajax2 = _interopRequireDefault(_ajax);
+
+var _runtime = require('runtime');
+
+var _runtime2 = _interopRequireDefault(_runtime);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20,6 +24,8 @@ exports.default = {
   namespaced: true,
   state: function state() {
     return {
+      categoryList: ['推荐', '娱乐', '生活', '体育', '军事', '科技', '互联网', '国际', '国内', '人文', '汽车', '财经', '房产', '时尚'],
+      category: '推荐',
       response: null
     };
   },
@@ -27,14 +33,19 @@ exports.default = {
   mutations: {
     setResponse: function setResponse(state, data) {
       state.response = data;
+    },
+    setCategory: function setCategory(state, data) {
+      state.category = data;
     }
   },
   actions: {
-    fetchResponse: function fetchResponse(context, _ref) {
+    fetchResponse: function fetchResponse(context) {
       var _this = this;
 
-      var req = _ref.req,
+      var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+          req = _ref.req,
           res = _ref.res;
+
       return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
         var response;
         return _regenerator2.default.wrap(function _callee$(_context) {
@@ -42,12 +53,17 @@ exports.default = {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.next = 2;
-                return _dvdServiceJsAjax2.default.send({
-                  type: 'post',
-                  url: '/api/mg/user/center/newIndex',
+                return _ajax2.default.send({
+                  type: 'get',
+                  url: 'http://' + (_runtime2.default.isServer() ? 'localhost' : location.hostname) + ':8100/api/queryNewsList',
                   dataType: 'json',
-                  data: {}
-                }, { req: req, res: res, debug: false });
+                  // data: {
+                  //   category: context.state.category,
+                  // },
+                  params: {
+                    category: context.state.category
+                  }
+                }, { req: req, res: res });
 
               case 2:
                 response = _context.sent;
@@ -59,7 +75,9 @@ exports.default = {
 
                 context.commit('setResponse', response);
 
-              case 4:
+                console.log(response);
+
+              case 5:
               case 'end':
                 return _context.stop();
             }

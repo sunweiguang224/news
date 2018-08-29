@@ -16,9 +16,9 @@ var _vueLazyload = require('vue-lazyload');
 
 var _vueLazyload2 = _interopRequireDefault(_vueLazyload);
 
-var _dvdBaseJsRuntime = require('dvd-base-js-runtime');
+var _runtime = require('runtime');
 
-var _dvdBaseJsRuntime2 = _interopRequireDefault(_dvdBaseJsRuntime);
+var _runtime2 = _interopRequireDefault(_runtime);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -36,7 +36,7 @@ exports.default = {
         path: '/index.html',
         alias: ['/'],
         meta: {
-          title: '首页'
+          title: '天天想看'
         },
         component: function component() {
           return import( /* webpackChunkName: "page/index/js/index" */'./index/index.vue');
@@ -54,7 +54,7 @@ exports.default = {
 
     // 全局后置钩子
     router.afterEach(function (to, from, next) {
-      if (_dvdBaseJsRuntime2.default.isClient()) {
+      if (_runtime2.default.isClient()) {
         if (to.meta && to.meta.title) {
           document.title = to.meta.title;
         }

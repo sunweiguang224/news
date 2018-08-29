@@ -12,18 +12,20 @@ var _swiper = require('swiper');
 
 var _swiper2 = _interopRequireDefault(_swiper);
 
+var _runtime = require('runtime');
+
+var _runtime2 = _interopRequireDefault(_runtime);
+
+var _date = require('date');
+
+var _date2 = _interopRequireDefault(_date);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 exports.default = {
   asyncData: function asyncData(_ref) {
-    // if (runtime.isClient() && store.state.center.response) {
-    //   store.dispatch('center/fetchResponse', {req, res});
-    // } else {
-    //   await store.dispatch('center/fetchResponse', {req, res});
-    // }
-
     var _this = this;
 
     var store = _ref.store,
@@ -34,6 +36,20 @@ exports.default = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              if (!(_runtime2.default.isClient() && store.state.center.response)) {
+                _context.next = 4;
+                break;
+              }
+
+              store.dispatch('index/fetchResponse', { req: req, res: res });
+              _context.next = 6;
+              break;
+
+            case 4:
+              _context.next = 6;
+              return store.dispatch('index/fetchResponse', { req: req, res: res });
+
+            case 6:
             case 'end':
               return _context.stop();
           }
@@ -48,8 +64,9 @@ exports.default = {
     return {
       window: window,
       document: document,
-      location: location
+      location: location,
 
+      date: _date2.default
     };
   },
 
@@ -58,14 +75,10 @@ exports.default = {
   beforeCreate: function beforeCreate() {},
   created: function created() {},
   mounted: function mounted() {
-    var swiper = new _swiper2.default(this.$refs.categoryBar, {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      centeredSlides: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true
-      }
+    new _swiper2.default(this.$refs.categoryBar, {
+      slidesPerView: 'auto'
+      // spaceBetween: 0,
+      // centeredSlides: true,
     });
   },
 

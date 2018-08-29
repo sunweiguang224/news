@@ -1,12 +1,14 @@
 import Swiper from 'swiper';
+import runtime from 'runtime';
+import date from 'date';
 
 export default {
   async asyncData ({store, req, res}) {
-    // if (runtime.isClient() && store.state.center.response) {
-    //   store.dispatch('center/fetchResponse', {req, res});
-    // } else {
-    //   await store.dispatch('center/fetchResponse', {req, res});
-    // }
+    if (runtime.isClient() && store.state.center.response) {
+      store.dispatch('index/fetchResponse', {req, res});
+    } else {
+      await store.dispatch('index/fetchResponse', {req, res});
+    }
   },
   components: {},
   props: {},
@@ -16,6 +18,7 @@ export default {
       document,
       location,
 
+      date,
     };
   },
   computed: {},
@@ -25,16 +28,13 @@ export default {
   created () {
   },
   mounted () {
-    var swiper = new Swiper(this.$refs.categoryBar, {
-      slidesPerView: 4,
-      spaceBetween: 30,
-      centeredSlides: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
+    new Swiper(this.$refs.categoryBar, {
+      slidesPerView: 'auto',
+      // spaceBetween: 0,
+      // centeredSlides: true,
     });
   },
-  methods: {},
+  methods: {
+  },
   filters: {},
 };

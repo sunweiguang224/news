@@ -5,10 +5,12 @@
 .app > .page.index {
 
   $title-bar-height: r(40);
+  $category-bar-height: r(36);
 
   .title-bar {
     position: fixed;
     top: 0;
+    z-index: 1;
 
     @include height($title-bar-height);
     @include full-width;
@@ -22,6 +24,75 @@
   .category-bar {
     position: fixed;
     top: $title-bar-height;
+    background: white;
+    z-index: 1;
+
+    &:after{
+      content: '';
+      display: block;
+      height: 1px;
+      transform: scaleY(0.5);
+      background: #ddd;
+    }
+
+    .swiper-wrapper {
+      .swiper-slide {
+        display: inline-block;
+        width: auto;
+        padding: 0 r(10);
+
+        @include height($category-bar-height);
+
+        text-align: center;
+        font-size: r(16);
+        color: #555;
+
+        &.active {
+          color: $color-subject;
+        }
+      }
+    }
   }
 
+  .news-list {
+    margin-top: $title-bar-height + $category-bar-height;
+    background: white;
+
+    .news {
+      margin: 0 r(10);
+
+      @include v-list-split-line;
+
+      .title {
+        padding: r(10) 0;
+        font-size: r(20);
+        line-height: 1.2;
+        @include ellipsis(2);
+      }
+
+      .imgs {
+        display: flex;
+        width: 100%;
+
+        .img-container {
+          flex: 1;
+          text-align: center;
+
+          &:not(:last-of-type) {
+            margin-right: r(2);
+          }
+
+          img {
+            max-width: 100%;
+          }
+        }
+      }
+
+      .attrs {
+        padding: r(10) 0;
+        font-size: r(12);
+        color: #999;
+      }
+    }
+  }
 }
