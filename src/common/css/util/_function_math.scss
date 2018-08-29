@@ -1,0 +1,94 @@
+/**
+ 功能：Math方法
+ 来自：http://blog.csdn.net/natsuyu/article/details/52191181
+*/
+
+// 计算一个数字的阶乘
+@function fact($number) {
+  $value: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+  @return $value;
+}
+
+// 计算$number的$exp次幂
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  } @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+// 根据角度计算弧度
+@function rad($angle) {
+  $unit: unit($angle);
+  $unitless: $angle / ($angle * 0 + 1);
+
+  @if $unit == deg {
+    $unitless: $unitless / 180 * pi();
+  }
+  @return $unitless;
+}
+
+// 返回π的值
+@function pi() {
+  @return 3.14159265359;
+}
+
+// 根据角度计算sin值
+@function sin($angle) {
+  $sin: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+  @return $sin;
+}
+
+// 根据角度计算cos值
+@function cos($angle) {
+  $cos: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+  }
+  @return $cos;
+}
+
+// 根据角度计算tan值
+@function tan($angle) {
+  @return sin($angle) / cos($angle);
+}
+
+// 求一个数的绝对值
+@function fabs($x) {
+  @if $x > 0 {
+    @return $x;
+  } @else {
+    @return $x * -1;
+  }
+}
+
+// 计算一个数的平方根
+@function sqrt($x) {
+  $ans: $x;
+  $del: 0.00001;
+  $pre: 0;
+  @while fabs($ans - $pre) >= $del {
+    $pre: $ans;
+    $ans: ($ans + $x / $ans) / 2;
+  }
+  @return $ans;
+}

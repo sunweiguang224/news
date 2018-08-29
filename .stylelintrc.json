@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "declaration-colon-space-after": "always-single-line",
+    "declaration-bang-space-before": "always",
+    "media-feature-name-no-unknown": [
+      true,
+      {
+        "severity": "error",
+        "ignoreMediaFeatureNames": [
+          "min-device-pixel-ratio",
+          "line-clamp",
+          "min--moz-device-pixel-ratio"
+        ]
+      }
+    ]
+  }
+}

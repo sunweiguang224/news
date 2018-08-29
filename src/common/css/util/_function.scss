@@ -1,0 +1,6 @@
+@import 'function_math';
+
+// rem单位
+@function r($px) {
+  @return $px / 100 * 1rem;
+}
