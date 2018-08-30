@@ -7,10 +7,14 @@
   $title-bar-height: r(40);
   $category-bar-height: r(36);
 
+  padding-top: $title-bar-height + $category-bar-height;
+  box-sizing: border-box;
+  height: 100%;
+
   .title-bar {
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
 
     @include height($title-bar-height);
     @include full-width;
@@ -25,14 +29,19 @@
     position: fixed;
     top: $title-bar-height;
     background: white;
-    z-index: 1;
+    z-index: 2;
+    @include full-width;
 
-    &:after{
+    &:after {
       content: '';
       display: block;
       height: 1px;
       transform: scaleY(0.5);
       background: #ddd;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
     }
 
     .swiper-wrapper {
@@ -54,44 +63,50 @@
     }
   }
 
-  .news-list {
-    margin-top: $title-bar-height + $category-bar-height;
+  .news-list-swiper {
     background: white;
 
-    .news {
-      margin: 0 r(10);
+    .swiper-wrapper {
 
-      @include v-list-split-line;
+      .swiper-slide {
 
-      .title {
-        padding: r(10) 0;
-        font-size: r(20);
-        line-height: 1.2;
-        @include ellipsis(2);
-      }
+        .news {
+          margin: 0 r(10);
 
-      .imgs {
-        display: flex;
-        width: 100%;
+          @include v-list-split-line;
 
-        .img-container {
-          flex: 1;
-          text-align: center;
-
-          &:not(:last-of-type) {
-            margin-right: r(2);
+          .title {
+            padding: r(10) 0;
+            font-size: r(20);
+            line-height: 1.2;
+            @include ellipsis(2);
           }
 
-          img {
-            max-width: 100%;
+          .imgs {
+            display: flex;
+            width: 100%;
+
+            .img-container {
+              flex: 1;
+              text-align: center;
+
+              &:not(:last-of-type) {
+                margin-right: r(2);
+              }
+
+              img {
+                max-width: 100%;
+                height: r(78);
+              }
+            }
+          }
+
+          .attrs {
+            padding: r(10) 0;
+            font-size: r(12);
+            color: #999;
           }
         }
-      }
-
-      .attrs {
-        padding: r(10) 0;
-        font-size: r(12);
-        color: #999;
       }
     }
   }

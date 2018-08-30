@@ -173,13 +173,13 @@
 // 为纵向列表每一项之间加0.5像素的分割线
 // @param $color 分割线颜色
 @mixin v-list-split-line($color: #E1E1E1) {
-  //position: relative;
+  position: relative;
   &:not(:last-of-type):after {
     content: '';
-    //position: absolute;
-    //bottom: 0;
-    //left: 0;
-    //width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     display: block;
     height: 1px;
     background: $color;

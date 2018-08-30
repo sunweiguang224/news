@@ -41,13 +41,13 @@ exports.default = {
                 break;
               }
 
-              store.dispatch('index/fetchResponse', { req: req, res: res });
+              store.dispatch('index/getNextPage', { req: req, res: res });
               _context.next = 6;
               break;
 
             case 4:
               _context.next = 6;
-              return store.dispatch('index/fetchResponse', { req: req, res: res });
+              return store.dispatch('index/getNextPage', { req: req, res: res });
 
             case 6:
             case 'end':
@@ -58,7 +58,9 @@ exports.default = {
     }))();
   },
 
-  components: {},
+  components: {
+    'dvd-service-com-paging-list': require('../../../common/com/dvd-service-com-paging-list/dvd-service-com-paging-list.vue').default
+  },
   props: {},
   data: function data() {
     return {
@@ -66,7 +68,12 @@ exports.default = {
       document: document,
       location: location,
 
-      date: _date2.default
+      // 工具模块
+      date: _date2.default,
+
+      // 页面内部状态
+      categoryBarSwiper: null,
+      newsListSwiper: null
     };
   },
 
@@ -75,13 +82,83 @@ exports.default = {
   beforeCreate: function beforeCreate() {},
   created: function created() {},
   mounted: function mounted() {
-    new _swiper2.default(this.$refs.categoryBar, {
+    var ts = this;
+
+    // 初始化分类swiper
+    this.categoryBarSwiper = new _swiper2.default(this.$refs.categoryBar, {
       slidesPerView: 'auto'
-      // spaceBetween: 0,
-      // centeredSlides: true,
     });
+
+    // setTimeout(() => {
+    // 初始化新闻列表swiper
+    this.newsListSwiper = new _swiper2.default(this.$refs.newsListSwiper, {
+      initialSlide: this.$store.getters['index/categoryIndex'],
+      on: {
+        slideChangeTransitionEnd: function slideChangeTransitionEnd() {
+          var category = ts.$store.state.index.categoryList[this.activeIndex];
+          ts.changeCategoryTo(category);
+        }
+      }
+    });
+    // }, 3000);
+
+    // debugger
   },
 
-  methods: {},
+  methods: {
+    changeCategoryTo: function changeCategoryTo(category) {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                // 更改category
+                _this2.$store.commit('index/setCategory', category);
+
+                // 新闻列表切换到category对应的列表
+                _this2.newsListSwiper.slideTo(_this2.$store.getters['index/categoryIndex']);
+
+                // category对应的列表如果空的，获取数据，然后更新分页swiper
+                if (!_this2.$store.state.index.newsList[category].length) {
+                  _this2.getNextPage();
+                }
+
+              case 3:
+              case 'end':
+                return _context2.stop();
+            }
+          }
+        }, _callee2, _this2);
+      }))();
+    },
+    getNextPage: function getNextPage(cb) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                debugger;
+                _context3.next = 3;
+                return _this3.$store.dispatch('index/getNextPage');
+
+              case 3:
+                _this3.$refs.newsList[_this3.$store.getters['index/categoryIndex']].swiper.update();
+                if (cb) {
+                  cb();
+                }
+
+              case 5:
+              case 'end':
+                return _context3.stop();
+            }
+          }
+        }, _callee3, _this3);
+      }))();
+    }
+  },
   filters: {}
 };
