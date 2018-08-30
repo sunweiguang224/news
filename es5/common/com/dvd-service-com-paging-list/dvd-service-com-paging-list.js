@@ -1,6 +1,16 @@
-import Swiper from 'swiper';
+'use strict';
 
-export default {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _swiper = require('swiper');
+
+var _swiper2 = _interopRequireDefault(_swiper);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
   props: {
     // 获取下一页方法
     getData: {
@@ -31,14 +41,14 @@ export default {
     noneTip: {
       type: String,
       default: '还没有红包哟~'
-    },
+    }
   },
-  data() {
+  data: function data() {
     return {
       // 全局变量
-      window,
-      document,
-      location,
+      window: window,
+      document: document,
+      location: location,
 
       // swiper实例
       swiper: null,
@@ -56,35 +66,34 @@ export default {
       ifShowLoadMore: false,
 
       // 时间间隔，不允许频繁触发下一页
-      isInMinInterver: false,
-    }
+      isInMinInterver: false
+    };
   },
+
   computed: {
     // 是否显示加载更多，超过一屏才显示
-//      ifShowLoadMore() {
-//        return this.listLength > 0 && this.$refs.wripper.clientHeight > this.$el.clientHeight;
-//      }
+    //      ifShowLoadMore() {
+    //        return this.listLength > 0 && this.$refs.wripper.clientHeight > this.$el.clientHeight;
+    //      }
   },
-  created() {
-  },
-  updated() {
-  },
-  mounted() {
+  created: function created() {},
+  updated: function updated() {},
+  mounted: function mounted() {
     var ts = this;
 
     // 加载更多元素实际显示高度
-//      let loadMoreHeight = ts.$refs.load_more.clientHeight;
-    let loadMoreHeight = 40;
+    //      let loadMoreHeight = ts.$refs.load_more.clientHeight;
+    var loadMoreHeight = 40;
 
     // 触底加载下一页
-    let ifGetData = function () {
+    var ifGetData = function ifGetData() {
       if (ts.ajaxing || ts.isInMinInterver) {
         return;
       }
 
       // 上拉加载更多
       if (-this.translate + loadMoreHeight > this.virtualSize - this.size) {
-        setTimeout(() => {
+        setTimeout(function () {
           ts.getNextPage();
           ts.isInMinInterver = false;
         }, 1000);
@@ -92,7 +101,7 @@ export default {
 
         // 下拉加载更多
       } else if (this.translate > loadMoreHeight) {
-        setTimeout(() => {
+        setTimeout(function () {
           ts.getNextPage('prepend');
           ts.isInMinInterver = false;
         }, 1000);
@@ -101,7 +110,7 @@ export default {
     };
 
     // 初始化swiper
-    ts.swiper = new Swiper(ts.$el, {
+    ts.swiper = new _swiper2.default(ts.$el, {
       speed: 500,
       freeMode: true,
       slidesPerView: 'auto',
@@ -115,7 +124,7 @@ export default {
         // 非正式反弹回调函数
         momentumBounce: ifGetData,
         // 触摸滑动回调函数
-        sliderMove: ifGetData,
+        sliderMove: ifGetData
         /*slideNextTransitionStart(){
          debugger
          },
@@ -136,25 +145,30 @@ export default {
       ts.getNextPage();
     }
   },
+
   // 销毁手动注册的事件和定时器等，单页面应用必须这样做，这是一个好习惯
-  beforeDestroy() {
-  },
+  beforeDestroy: function beforeDestroy() {},
+
   filters: {},
   watch: {
     // 列表长度变化时重新设置swiper的slides高度
-    listLength() {
+    listLength: function listLength() {
       this.$nextTick(function () {
         this.swiper.updateSlides();
-      })
-    },
+      });
+    }
   },
   methods: {
     // 获取下一页
-    getNextPage(type = 'append') {
-      let ts = this;
+    getNextPage: function getNextPage() {
+      var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'append';
+
+      var ts = this;
       ts.isLoading = true;
       // ajax完成回调
-      let cb = function (isOver = false) {
+      var cb = function cb() {
+        var isOver = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
         ts.isLoading = false;
         // 业务代码告诉组件是否全部加载结束，因为
         ts.isOver = isOver;
@@ -166,13 +180,13 @@ export default {
           ts.ifShowLoadMore = ts.listLength > 0 && ts.$refs.wrapper.clientHeight > ts.$el.clientHeight;
           ts.$nextTick(function () {
             ts.swiper.updateSlides();
-          })
+          });
         }, 1);
       };
       ts.getData({
-        cb,
-        type,
+        cb: cb,
+        type: type
       });
     }
-  },
-}
+  }
+};

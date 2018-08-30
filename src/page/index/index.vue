@@ -9,7 +9,8 @@
       <div class="swiper-wrapper">
         <span class="swiper-slide" v-for="(item, i) in $store.state.index.categoryList"
               :class="{active: $store.state.index.category === item}"
-              @click="changeCategoryTo(item);">
+              @click="newsListSwiper.slideTo(i);">
+              <!--@click="changeCategoryTo(item);">-->
           {{item}}
         </span>
       </div>

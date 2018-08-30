@@ -89,20 +89,17 @@ exports.default = {
       slidesPerView: 'auto'
     });
 
-    // setTimeout(() => {
     // 初始化新闻列表swiper
     this.newsListSwiper = new _swiper2.default(this.$refs.newsListSwiper, {
       initialSlide: this.$store.getters['index/categoryIndex'],
       on: {
-        slideChangeTransitionEnd: function slideChangeTransitionEnd() {
+        // 滚动至category对应列表时，更新category-bar和列表数据
+        slideChangeTransitionStart: function slideChangeTransitionStart() {
           var category = ts.$store.state.index.categoryList[this.activeIndex];
           ts.changeCategoryTo(category);
         }
       }
     });
-    // }, 3000);
-
-    // debugger
   },
 
   methods: {
@@ -114,14 +111,15 @@ exports.default = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                debugger;
                 // 更改category
                 _this2.$store.commit('index/setCategory', category);
 
-                // 新闻列表切换到category对应的列表
-                _this2.newsListSwiper.slideTo(_this2.$store.getters['index/categoryIndex']);
+                // // 新闻列表切换到category对应的列表
+                // this.newsListSwiper.slideTo(this.$store.getters['index/categoryIndex']);
 
                 // category对应的列表如果空的，获取数据，然后更新分页swiper
-                if (!_this2.$store.state.index.newsList[category].length) {
+                if (!_this2.$store.state.index.newsList[category].list.length) {
                   _this2.getNextPage();
                 }
 

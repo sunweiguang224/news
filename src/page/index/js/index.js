@@ -42,36 +42,33 @@ export default {
       slidesPerView: 'auto',
     });
 
-    // setTimeout(() => {
     // 初始化新闻列表swiper
     this.newsListSwiper = new Swiper(this.$refs.newsListSwiper, {
       initialSlide: this.$store.getters['index/categoryIndex'],
       on: {
-        slideChangeTransitionEnd () {
+        // 滚动至category对应列表时，更新category-bar和列表数据
+        slideChangeTransitionStart () {
           let category = ts.$store.state.index.categoryList[this.activeIndex];
           ts.changeCategoryTo(category);
         }
       },
     });
-    // }, 3000);
-
-    // debugger
   },
   methods: {
     async changeCategoryTo (category) {
+      debugger
       // 更改category
       this.$store.commit('index/setCategory', category);
 
-      // 新闻列表切换到category对应的列表
-      this.newsListSwiper.slideTo(this.$store.getters['index/categoryIndex']);
+      // // 新闻列表切换到category对应的列表
+      // this.newsListSwiper.slideTo(this.$store.getters['index/categoryIndex']);
 
       // category对应的列表如果空的，获取数据，然后更新分页swiper
-      if (!this.$store.state.index.newsList[category].length) {
+      if (!this.$store.state.index.newsList[category].list.length) {
         this.getNextPage();
       }
     },
     async getNextPage ({cb, type} = {}) {
-      // return;
       await this.$store.dispatch('index/getNextPage', {
         type,
       });
