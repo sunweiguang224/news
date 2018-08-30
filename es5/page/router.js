@@ -33,6 +33,7 @@ exports.default = {
     var router = new _vueRouter2.default({
       mode: 'history',
       routes: [{
+        name: 'index',
         path: '/index.html',
         alias: ['/'],
         meta: {
@@ -40,6 +41,18 @@ exports.default = {
         },
         component: function component() {
           return import( /* webpackChunkName: "page/index/js/index" */'./index/index.vue');
+        },
+        beforeEnter: function beforeEnter(to, from, next) {
+          next();
+        }
+      }, {
+        name: 'detail',
+        path: '/detail.html',
+        meta: {
+          title: '详情'
+        },
+        component: function component() {
+          return import( /* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue');
         },
         beforeEnter: function beforeEnter(to, from, next) {
           next();
@@ -55,12 +68,13 @@ exports.default = {
     // 全局后置钩子
     router.afterEach(function (to, from, next) {
       if (_runtime2.default.isClient()) {
-        if (to.meta && to.meta.title) {
-          document.title = to.meta.title;
-        }
-        var startPos = 0;
-        window.scrollTo(startPos, startPos + 1);
-        window.scrollTo(startPos, startPos);
+        // 设置页面title
+        document.title = to.params && to.params.title || to.meta && to.meta.title;
+
+        // 设置页面位置
+        // const startPos = 0;
+        // window.scrollTo(startPos, startPos + 1);
+        // window.scrollTo(startPos, startPos);
       }
     });
 

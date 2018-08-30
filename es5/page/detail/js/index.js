@@ -36,15 +36,20 @@ exports.default = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (store.state.index.newsList[store.state.index.category].list.length) {
-                _context.next = 3;
+              if (!(_runtime2.default.isClient() && store.state.center.response)) {
+                _context.next = 4;
                 break;
               }
 
-              _context.next = 3;
+              store.dispatch('index/getNextPage', { req: req, res: res });
+              _context.next = 6;
+              break;
+
+            case 4:
+              _context.next = 6;
               return store.dispatch('index/getNextPage', { req: req, res: res });
 
-            case 3:
+            case 6:
             case 'end':
               return _context.stop();
           }
@@ -106,6 +111,7 @@ exports.default = {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                debugger;
                 // 更改category
                 _this2.$store.commit('index/setCategory', category);
 
@@ -117,7 +123,7 @@ exports.default = {
                   _this2.getNextPage();
                 }
 
-              case 2:
+              case 3:
               case 'end':
                 return _context2.stop();
             }

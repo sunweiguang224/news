@@ -1,0 +1,46 @@
+@import "../../../common/css/util";
+@import "../../../common/css/common";
+//@import "../../../../node_modules/swiper/dist/css/swiper";
+
+.app > .page.detail {
+  padding: r(10) r(10);
+
+  .title {
+    padding: r(10) 0;
+    font-size: r(22);
+    line-height: 1.2;
+    font-weight: bold;
+  }
+
+  .attrs {
+    padding: r(10) 0;
+    font-size: r(12);
+    color: #999;
+    display: flex;
+
+    .left {
+      flex: 1;
+
+      .attr {
+        margin-right: r(5);
+      }
+    }
+    .right {
+      width: r(50);
+    }
+  }
+
+  .text {
+    padding: r(10) 0;
+    font-size: r(17);
+    line-height: 1.5;
+  }
+
+  .image {
+    padding: r(10) 0;
+
+    img {
+      width: 100%;
+    }
+  }
+}

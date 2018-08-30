@@ -20,7 +20,8 @@ exports.default = {
   create: function create() {
     return new _vuex2.default.Store({
       modules: {
-        index: require('./index/js/store.js').default
+        index: require('./index/js/store.js').default,
+        detail: require('./detail/js/store.js').default
       }
     });
   }

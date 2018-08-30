@@ -20,35 +20,13 @@
     <div class="news-list-swiper swiper-container" ref="newsListSwiper">
       <div class="swiper-wrapper">
         <span class="swiper-slide" v-for="(category, i) in $store.state.index.categoryList">
-
-          <!--<div class="news" v-for="(item, i) in $store.state.index.newsList[category]">
-            <div class="title">{{item.title}}</div>
-            <div class="imgs">
-              <div class="img-container" v-for="img in item.imgs">
-                <img :src="img" alt="想看">
-              </div>
-            </div>
-            <div class="attrs">
-              <span>{{item.author}}</span>
-              <span>{{date.format(item.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
-            </div>
-          </div>-->
-
           <dvd-service-com-paging-list class="news-list" ref="newsList"
            :get-data="getNextPage"
            :list-length="$store.state.index.newsList[category].list.length"
           >
-            <!--:class="'list-' + i"-->
-                                       <!--ref="paging"-->
-                                         <!--:list-height="listHeight"-->
-                                         <!--:list-length="item.length"-->
-                                         <!--:get-data="getData"-->
-                                         <!--:is-load-first-page="false"-->
-                                         <!--none-tip="还没有红包哟~"-->
-
-
             <div slot="list">
-              <div class="news" v-for="(item, i) in $store.state.index.newsList[category].list">
+              <div class="news" v-for="(item, i) in $store.state.index.newsList[category].list"
+                @click="$router.push({name: 'detail', params: {title: item.title, news: item}});">
                 <div class="title">{{item.title}}</div>
                 <div class="imgs">
                   <div class="img-container" v-for="img in item.imgs">
@@ -56,8 +34,8 @@
                   </div>
                 </div>
                 <div class="attrs">
-                  <span>{{item.author}}</span>
-                  <span>{{date.format(item.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
+                  <span class="attr">{{item.author}}</span>
+                  <span class="attr">{{date.format(item.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
                 </div>
               </div>
             </div>

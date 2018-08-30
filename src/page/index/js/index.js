@@ -4,9 +4,7 @@ import date from 'date';
 
 export default {
   async asyncData ({store, req, res}) {
-    if (runtime.isClient() && store.state.center.response) {
-      store.dispatch('index/getNextPage', {req, res});
-    } else {
+    if (!store.state.index.newsList[store.state.index.category].list.length) {
       await store.dispatch('index/getNextPage', {req, res});
     }
   },
@@ -56,7 +54,6 @@ export default {
   },
   methods: {
     async changeCategoryTo (category) {
-      debugger
       // 更改category
       this.$store.commit('index/setCategory', category);
 

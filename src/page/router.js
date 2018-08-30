@@ -12,12 +12,24 @@ export default {
       mode: 'history',
       routes: [
         {
+          name: 'index',
           path: '/index.html',
           alias: ['/'],
           meta: {
             title: '天天想看',
           },
           component: () => import(/* webpackChunkName: "page/index/js/index" */'./index/index.vue'),
+          beforeEnter (to, from, next) {
+            next();
+          },
+        },
+        {
+          name: 'detail',
+          path: '/detail.html',
+          meta: {
+            title: '详情',
+          },
+          component: () => import(/* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue'),
           beforeEnter (to, from, next) {
             next();
           },
@@ -33,12 +45,13 @@ export default {
     // 全局后置钩子
     router.afterEach((to, from, next) => {
       if (runtime.isClient()) {
-        if (to.meta && to.meta.title) {
-          document.title = to.meta.title;
-        }
-        const startPos = 0;
-        window.scrollTo(startPos, startPos + 1);
-        window.scrollTo(startPos, startPos);
+        // 设置页面title
+        document.title = to.params && to.params.title || to.meta && to.meta.title;
+
+        // 设置页面位置
+        // const startPos = 0;
+        // window.scrollTo(startPos, startPos + 1);
+        // window.scrollTo(startPos, startPos);
       }
     });
 
