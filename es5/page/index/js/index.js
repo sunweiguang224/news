@@ -133,25 +133,30 @@ exports.default = {
         }, _callee2, _this2);
       }))();
     },
-    getNextPage: function getNextPage(cb) {
+    getNextPage: function getNextPage() {
       var _this3 = this;
+
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          cb = _ref2.cb,
+          type = _ref2.type;
 
       return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
         return _regenerator2.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                debugger;
-                _context3.next = 3;
-                return _this3.$store.dispatch('index/getNextPage');
+                _context3.next = 2;
+                return _this3.$store.dispatch('index/getNextPage', {
+                  type: type
+                });
 
-              case 3:
+              case 2:
                 _this3.$refs.newsList[_this3.$store.getters['index/categoryIndex']].swiper.update();
                 if (cb) {
                   cb();
                 }
 
-              case 5:
+              case 4:
               case 'end':
                 return _context3.stop();
             }

@@ -70,9 +70,11 @@ export default {
         this.getNextPage();
       }
     },
-    async getNextPage (cb) {
-      debugger
-      await this.$store.dispatch('index/getNextPage');
+    async getNextPage ({cb, type} = {}) {
+      // return;
+      await this.$store.dispatch('index/getNextPage', {
+        type,
+      });
       this.$refs.newsList[this.$store.getters['index/categoryIndex']].swiper.update();
       if (cb) {
         cb();

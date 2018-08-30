@@ -12,6 +12,13 @@
     @include height(r(16));
     color: #666;
     text-align: center;
+
+    &.pull-down {
+      position: absolute;
+      top: r(-37);
+      width: 100%;
+    }
+
     .loading {
       .text {
         font-size: r(14);

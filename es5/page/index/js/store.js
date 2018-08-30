@@ -124,7 +124,11 @@ exports.default = {
       state.category = data;
     },
     prependNewsList: function prependNewsList(state, data) {
-      state.newsList[data.category] = data.newsList.concat(state.newsList[data.category]);
+      var newNewsList = JSON.parse(JSON.stringify(state.newsList[data.category]));
+      newNewsList.list = data.newsList.concat(newNewsList.list);
+      newNewsList.pageNo += 1;
+      newNewsList.isOver += false;
+      state.newsList[data.category] = newNewsList;
     },
     appendNewsList: function appendNewsList(state, data) {
       var newNewsList = JSON.parse(JSON.stringify(state.newsList[data.category]));
@@ -150,7 +154,9 @@ exports.default = {
 
       var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
           req = _ref.req,
-          res = _ref.res;
+          res = _ref.res,
+          _ref$type = _ref.type,
+          type = _ref$type === undefined ? 'append' : _ref$type;
 
       return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
         var category, newsList, list;
@@ -181,10 +187,17 @@ exports.default = {
 
                 console.log(list);
 
-                context.commit('appendNewsList', {
-                  category: category,
-                  newsList: list
-                });
+                if (type == 'append') {
+                  context.commit('appendNewsList', {
+                    category: category,
+                    newsList: list
+                  });
+                } else if (type == 'prepend') {
+                  context.commit('prependNewsList', {
+                    category: category,
+                    newsList: list
+                  });
+                }
 
               case 7:
               case 'end':

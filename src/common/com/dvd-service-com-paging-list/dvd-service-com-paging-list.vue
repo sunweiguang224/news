@@ -2,14 +2,24 @@
 <template>
   <!--垂直滑动-->
   <div class="swiper-container dvd-service-com-paging-list" :style="{height: listHeight}">
-    <div class="swiper-wrapper" ref="wripper">
+    <div class="swiper-wrapper" ref="wrapper">
+
+      <!--下拉加载更多-->
+      <div class="load-more pull-down" ref="pullDown">
+        <div class="over" v-if="isOver">没有更多了~</div>
+        <div class="loading" v-else>
+          <span class="text">加载更多</span>
+          <img src="./img/loading.gif">
+        </div>
+      </div>
+
       <!--列表-->
       <div class="swiper-slide">
         <slot name="list"></slot>
       </div>
 
-      <!--加载更多-->
-      <div class="swiper-slide load-more" ref="load_more" v-if="ifShowLoadMore">
+      <!--上拉加载更多-->
+      <div class="swiper-slide load-more" ref="pullUp">
         <div class="over" v-if="isOver">没有更多了~</div>
         <div class="loading" v-else>
           <span class="text">加载更多</span>

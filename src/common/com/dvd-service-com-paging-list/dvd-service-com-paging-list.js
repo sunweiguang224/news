@@ -54,6 +54,9 @@ export default {
 
       // 是否显示加载更多，超过一屏才显示
       ifShowLoadMore: false,
+
+      // 时间间隔，不允许频繁触发下一页
+      isInMinInterver: false,
     }
   },
   computed: {
@@ -73,12 +76,36 @@ export default {
 //      let loadMoreHeight = ts.$refs.load_more.clientHeight;
     let loadMoreHeight = 40;
 
-
     // 触底加载下一页
     let ifGetData = function () {
-      if (!ts.ajaxing && -this.translate + loadMoreHeight > this.virtualSize - this.size) {
-        ts.getNextPage();
+      debugger
+      if (ts.ajaxing || ts.isInMinInterver) {
+        return;
       }
+
+      // 上拉加载更多
+      if (-this.translate + loadMoreHeight > this.virtualSize - this.size) {
+        setTimeout(() => {
+          ts.getNextPage();
+          ts.isInMinInterver = false;
+        }, 1000);
+        ts.isInMinInterver = true;
+
+        // 下拉加载更多
+      } else if (this.translate > loadMoreHeight) {
+        setTimeout(() => {
+          ts.getNextPage('prepend');
+          ts.isInMinInterver = false;
+        }, 1000);
+        ts.isInMinInterver = true;
+      } else {
+        return;
+      }
+
+      // // 1秒后允许下次触发
+      // setTimeout(() => {
+      //   ts.isInMinInterver = false;
+      // }, 3000);
     };
 
     // 初始化swiper
@@ -93,6 +120,18 @@ export default {
         momentumBounce: ifGetData,
         // 触摸滑动回调函数
         sliderMove: ifGetData,
+        /*slideNextTransitionStart(){
+         debugger
+         },
+         slideNextTransitionEnd(){
+         debugger
+         },
+         slidePrevTransitionStart(){
+         debugger
+         },
+         slidePrevTransitionEnd(){
+         debugger
+         },*/
       }
     });
 
@@ -115,10 +154,8 @@ export default {
   },
   methods: {
     // 获取下一页
-    getNextPage() {
-      debugger
+    getNextPage(type = 'append') {
       let ts = this;
-      if (ts.isLoading || ts.isOver) return;
       ts.isLoading = true;
       // ajax完成回调
       let cb = function (isOver = false) {
@@ -127,15 +164,19 @@ export default {
         ts.isOver = isOver;
         // 页码+1
         ts.pageNo++;
-        // 是否显示加载更多，超过一屏才显示，延迟一毫秒等待重绘完成
+        // 是否显示加载更多，延迟一毫秒等待重绘完成
         setTimeout(function () {
-          ts.ifShowLoadMore = ts.listLength > 0 && ts.$refs.wripper.clientHeight > ts.$el.clientHeight;
+          // 有数据 && 超过一屏，才显示
+          ts.ifShowLoadMore = ts.listLength > 0 && ts.$refs.wrapper.clientHeight > ts.$el.clientHeight;
           ts.$nextTick(function () {
             ts.swiper.updateSlides();
           })
         }, 1);
       };
-      ts.getData(cb);
+      ts.getData({
+        cb,
+        type,
+      });
     }
   },
 }

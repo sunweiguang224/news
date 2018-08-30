@@ -33,7 +33,10 @@
             </div>
           </div>-->
 
-          <dvd-service-com-paging-list class="news-list" ref="newsList" :get-data="getNextPage">
+          <dvd-service-com-paging-list class="news-list" ref="newsList"
+           :get-data="getNextPage"
+           :list-length="$store.state.index.newsList[category].list.length"
+          >
             <!--:class="'list-' + i"-->
                                        <!--ref="paging"-->
                                          <!--:list-height="listHeight"-->

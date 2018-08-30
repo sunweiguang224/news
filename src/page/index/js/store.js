@@ -116,7 +116,11 @@ export default {
       state.category = data;
     },
     prependNewsList (state, data) {
-      state.newsList[data.category] = data.newsList.concat(state.newsList[data.category]);
+      let newNewsList = JSON.parse(JSON.stringify(state.newsList[data.category]));
+      newNewsList.list = data.newsList.concat(newNewsList.list);
+      newNewsList.pageNo += 1;
+      newNewsList.isOver += false;
+      state.newsList[data.category] = newNewsList;
     },
     appendNewsList (state, data) {
       let newNewsList = JSON.parse(JSON.stringify(state.newsList[data.category]));
@@ -137,7 +141,7 @@ export default {
     }
   },
   actions: {
-    async getNextPage (context, {req, res} = {}) {
+    async getNextPage (context, {req, res, type = 'append'} = {}) {
       let category = context.state.category;
 
       let newsList = context.state.newsList[category];
@@ -158,10 +162,17 @@ export default {
 
       console.log(list)
 
-      context.commit('appendNewsList', {
-        category,
-        newsList: list,
-      });
+      if (type == 'append') {
+        context.commit('appendNewsList', {
+          category,
+          newsList: list,
+        });
+      } else if (type == 'prepend') {
+        context.commit('prependNewsList', {
+          category,
+          newsList: list,
+        });
+      }
     },
   },
 };
