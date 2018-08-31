@@ -1,9 +1,19 @@
 import Swiper from 'swiper';
 import runtime from 'runtime';
 import date from 'date';
+import ua from 'ua';
+import console from 'console';
+
 
 export default {
   async asyncData ({store, req, res}) {
+
+    console.log(1)
+    console.log(ua.getStatusBarHeight(req.headers && req.headers['user-agent']));
+    console.log(2)
+
+    store.commit('global/setStatusBarHeight', ua.getStatusBarHeight(req.headers && req.headers['user-agent']));
+
     if (!store.state.index.newsList[store.state.index.category].list.length) {
       await store.dispatch('index/getNextPage', {req, res});
     }
@@ -34,6 +44,10 @@ export default {
   },
   mounted () {
     let ts = this;
+
+    alert(this.$store.state.global.statusBarHeight);
+
+    // alert(navigator.userAgent)
 
     // 初始化分类swiper
     this.categoryBarSwiper = new Swiper(this.$refs.categoryBar, {

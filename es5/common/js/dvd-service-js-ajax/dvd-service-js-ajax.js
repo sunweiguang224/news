@@ -199,37 +199,35 @@ exports.default = {
               }
 
               // 防止出错时查不到请求参数
-              _console2.default.log('\u63A5\u53E3\u8BF7\u6C42\u53C2\u6570(' + options.url + ')\uFF1A' + JSON.stringify(options, ' ', 2), { req: req });
+              // console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
 
               // 设置接口超时时间30s
               options.timeout = 30000;
 
               // 发送请求
               response = null;
-              _context.prev = 8;
+              _context.prev = 7;
               start = Date.now();
-              _context.next = 12;
+              _context.next = 11;
               return _axios2.default.request(options);
 
-            case 12:
+            case 11:
               response = _context.sent;
-
-              _console2.default.log('\u8BF7\u6C42\u53D1\u9001->\u8FD4\u56DE\u5171\u8017\u65F6\uFF1A' + (Date.now() - start) + 'ms (' + options.url + ')', { req: req });
-              _context.next = 21;
+              _context.next = 18;
               break;
 
-            case 16:
-              _context.prev = 16;
-              _context.t0 = _context['catch'](8);
+            case 14:
+              _context.prev = 14;
+              _context.t0 = _context['catch'](7);
 
-              _console2.default.error('\u8C03\u7528\u63A5\u53E3\u53D1\u751F\u9519\u8BEF\uFF1A(' + options.url + ')', { req: req });
+              // console.error(`调用接口发生错误：(${options.url})`, {req});
               // 兼容jquery的回调写法
               if (oldOptions.error) {
                 oldOptions.error(_context.t0);
               }
               throw new Error(_context.t0);
 
-            case 21:
+            case 18:
 
               // 接口信息，只有request属性没有打印（request内部多数属性都是对象和方法，信息类型的属性很少）
               simpleResponse = {
@@ -246,13 +244,13 @@ exports.default = {
 
               if (_runtime2.default.isServer()) {
                 // 接口返回code不为0时，自动打出error log
-                if (response.data && parseInt(response.data.code) !== 0) {
-                  // console.log(`发现接口返回code码不为0：\n${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
-                  _console2.default.log('\u53D1\u73B0\u63A5\u53E3\u8FD4\u56DEcode\u7801\u4E0D\u4E3A0\uFF1A\u2193', { req: req });
-                }
+                if (response.data && parseInt(response.data.code) !== 0) {}
+                // console.log(`发现接口返回code码不为0：\n${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
+                // console.log(`发现接口返回code码不为0：↓`, {req});
+
 
                 // if (debug || '[[env]]'.toString() !== 'prod') {
-                _console2.default.log('\u63A5\u53E3\u8BF7\u6C42\u4FE1\u606F\uFF08' + options.url + '\uFF09\uFF1A' + JSON.stringify(simpleResponse, ' ', 2), { req: req });
+                // console.log(`接口请求信息（${options.url}）：${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
                 // }
               }
 
@@ -301,12 +299,12 @@ exports.default = {
 
               return _context.abrupt('return', response.data);
 
-            case 26:
+            case 23:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this, [[8, 16]]);
+      }, _callee, _this, [[7, 14]]);
     }))();
   }
 };

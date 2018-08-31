@@ -20,6 +20,14 @@ var _date = require('date');
 
 var _date2 = _interopRequireDefault(_date);
 
+var _ua = require('ua');
+
+var _ua2 = _interopRequireDefault(_ua);
+
+var _console = require('console');
+
+var _console2 = _interopRequireDefault(_console);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -36,15 +44,22 @@ exports.default = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+
+              _console2.default.log(1);
+              _console2.default.log(_ua2.default.getStatusBarHeight(req.headers && req.headers['user-agent']));
+              _console2.default.log(2);
+
+              store.commit('global/setStatusBarHeight', _ua2.default.getStatusBarHeight(req.headers && req.headers['user-agent']));
+
               if (store.state.index.newsList[store.state.index.category].list.length) {
-                _context.next = 3;
+                _context.next = 7;
                 break;
               }
 
-              _context.next = 3;
+              _context.next = 7;
               return store.dispatch('index/getNextPage', { req: req, res: res });
 
-            case 3:
+            case 7:
             case 'end':
               return _context.stop();
           }
@@ -78,6 +93,10 @@ exports.default = {
   created: function created() {},
   mounted: function mounted() {
     var ts = this;
+
+    alert(this.$store.state.global.statusBarHeight);
+
+    // alert(navigator.userAgent)
 
     // 初始化分类swiper
     this.categoryBarSwiper = new _swiper2.default(this.$refs.categoryBar, {

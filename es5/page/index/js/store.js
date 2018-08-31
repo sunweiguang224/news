@@ -185,7 +185,7 @@ exports.default = {
                 list = _context.sent;
 
 
-                console.log(list);
+                // console.log(list)
 
                 if (type == 'append') {
                   context.commit('appendNewsList', {
@@ -199,7 +199,7 @@ exports.default = {
                   });
                 }
 
-              case 7:
+              case 6:
               case 'end':
                 return _context.stop();
             }

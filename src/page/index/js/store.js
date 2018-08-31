@@ -160,7 +160,7 @@ export default {
         },
       }, {req, res});
 
-      console.log(list)
+      // console.log(list)
 
       if (type == 'append') {
         context.commit('appendNewsList', {

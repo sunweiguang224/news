@@ -143,7 +143,8 @@ var json = {
       'date': _path2.default.resolve('src/common/js/dvd-base-js-date/dvd-base-js-date.js'),
       'number': _path2.default.resolve('src/common/js/dvd-base-js-number/dvd-base-js-number.js'),
       'type': _path2.default.resolve('src/common/js/dvd-base-js-type/dvd-base-js-type.js'),
-      'console': _path2.default.resolve('src/common/js/dvd-service-js-console/dvd-service-js-console.js')
+      'console': _path2.default.resolve('src/common/js/dvd-service-js-console/dvd-service-js-console.js'),
+      'ua': _path2.default.resolve('src/common/js/dvd-base-js-ua/dvd-base-js-ua.js')
     }
   }
 };

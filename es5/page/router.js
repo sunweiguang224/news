@@ -39,9 +39,8 @@ exports.default = {
         meta: {
           title: '天天想看'
         },
-        component: function component() {
-          return import( /* webpackChunkName: "page/index/js/index" */'./index/index.vue');
-        },
+        // component: () => import(/* webpackChunkName: "page/index/js/index" */'./index/index.vue'),
+        component: require('./index/index.vue').default,
         beforeEnter: function beforeEnter(to, from, next) {
           next();
         }
@@ -51,9 +50,8 @@ exports.default = {
         meta: {
           title: '详情'
         },
-        component: function component() {
-          return import( /* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue');
-        },
+        // component: () => import(/* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue'),
+        component: require('./detail/detail.vue').default,
         beforeEnter: function beforeEnter(to, from, next) {
           next();
         }

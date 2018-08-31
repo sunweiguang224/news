@@ -151,7 +151,7 @@ export default {
     }
 
     // 防止出错时查不到请求参数
-    console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
+    // console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
 
     // 设置接口超时时间30s
     options.timeout = 30000;
@@ -161,9 +161,9 @@ export default {
     try {
       let start = Date.now();
       response = await axios.request(options);
-      console.log(`请求发送->返回共耗时：${Date.now() - start}ms (${options.url})`, {req});
+      // console.log(`请求发送->返回共耗时：${Date.now() - start}ms (${options.url})`, {req});
     } catch (err) {
-      console.error(`调用接口发生错误：(${options.url})`, {req});
+      // console.error(`调用接口发生错误：(${options.url})`, {req});
       // 兼容jquery的回调写法
       if (oldOptions.error) {
         oldOptions.error(err);
@@ -187,11 +187,11 @@ export default {
       // 接口返回code不为0时，自动打出error log
       if (response.data && parseInt(response.data.code) !== 0) {
         // console.log(`发现接口返回code码不为0：\n${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
-        console.log(`发现接口返回code码不为0：↓`, {req});
+        // console.log(`发现接口返回code码不为0：↓`, {req});
       }
 
       // if (debug || '[[env]]'.toString() !== 'prod') {
-      console.log(`接口请求信息（${options.url}）：${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
+      // console.log(`接口请求信息（${options.url}）：${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
       // }
     }
 
