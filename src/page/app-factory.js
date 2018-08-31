@@ -10,7 +10,7 @@ export default {
   /* 工厂方法，创建vue实例 */
   create: ({req, res} = {}) => new Vue({
     router: router.create({req, res}),
-    store: store.create(),
+    store: store.create({req, res}),
     render: createElement => createElement(
       // 应用容器
       'div',

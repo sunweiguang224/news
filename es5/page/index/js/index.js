@@ -44,22 +44,15 @@ exports.default = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-
-              _console2.default.log(1);
-              _console2.default.log(_ua2.default.getStatusBarHeight(req.headers && req.headers['user-agent']));
-              _console2.default.log(2);
-
-              store.commit('global/setStatusBarHeight', _ua2.default.getStatusBarHeight(req.headers && req.headers['user-agent']));
-
               if (store.state.index.newsList[store.state.index.category].list.length) {
-                _context.next = 7;
+                _context.next = 3;
                 break;
               }
 
-              _context.next = 7;
+              _context.next = 3;
               return store.dispatch('index/getNextPage', { req: req, res: res });
 
-            case 7:
+            case 3:
             case 'end':
               return _context.stop();
           }

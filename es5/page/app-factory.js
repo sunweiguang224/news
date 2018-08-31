@@ -31,7 +31,7 @@ exports.default = {
 
     return new _vue2.default({
       router: _router2.default.create({ req: req, res: res }),
-      store: _store2.default.create(),
+      store: _store2.default.create({ req: req, res: res }),
       render: function render(createElement) {
         return createElement(
         // 应用容器

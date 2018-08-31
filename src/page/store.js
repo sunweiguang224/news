@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import ua from 'ua';
 
 Vue.use(Vuex);
 
 export default {
-  create () {
+  create ({req, res}) {
     return new Vuex.Store({
       modules: {
         index: require('./index/js/store.js').default,
@@ -13,7 +14,7 @@ export default {
           namespaced: true,
           state () {
             return {
-              statusBarHeight: 20,
+              statusBarHeight: ua.getStatusBarHeight(req && req.headers && req.headers['user-agent']) || 20,
             };
           },
           mutations: {

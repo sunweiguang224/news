@@ -12,12 +12,19 @@ var _vuex = require('vuex');
 
 var _vuex2 = _interopRequireDefault(_vuex);
 
+var _ua = require('ua');
+
+var _ua2 = _interopRequireDefault(_ua);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _vue2.default.use(_vuex2.default);
 
 exports.default = {
-  create: function create() {
+  create: function create(_ref) {
+    var req = _ref.req,
+        res = _ref.res;
+
     return new _vuex2.default.Store({
       modules: {
         index: require('./index/js/store.js').default,
@@ -26,7 +33,7 @@ exports.default = {
           namespaced: true,
           state: function state() {
             return {
-              statusBarHeight: 20
+              statusBarHeight: _ua2.default.getStatusBarHeight(req && req.headers && req.headers['user-agent']) || 20
             };
           },
 

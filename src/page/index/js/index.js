@@ -7,13 +7,6 @@ import console from 'console';
 
 export default {
   async asyncData ({store, req, res}) {
-
-    console.log(1)
-    console.log(ua.getStatusBarHeight(req.headers && req.headers['user-agent']));
-    console.log(2)
-
-    store.commit('global/setStatusBarHeight', ua.getStatusBarHeight(req.headers && req.headers['user-agent']));
-
     if (!store.state.index.newsList[store.state.index.category].list.length) {
       await store.dispatch('index/getNextPage', {req, res});
     }

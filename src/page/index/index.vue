@@ -2,7 +2,7 @@
   <div class="index">
 
     <!--顶部标题栏-->
-    <div class="title-bar">天天想看11111</div>
+    <div class="title-bar">天天想看</div>
 
     <!--分类栏-->
     <div class="category-bar swiper-container" ref="categoryBar">
