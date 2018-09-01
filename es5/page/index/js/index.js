@@ -76,7 +76,13 @@ exports.default = {
 
       // 页面内部状态
       categoryBarSwiper: null,
-      newsListSwiper: null
+      newsListSwiper: null,
+
+      // 样式
+      style: {
+        titleBarHeight: 40,
+        categoryBarHeight: 36
+      }
     };
   },
 
@@ -87,7 +93,7 @@ exports.default = {
   mounted: function mounted() {
     var ts = this;
 
-    alert(this.$store.state.global.statusBarHeight);
+    // alert(this.$store.state.global.statusBarHeight);
 
     // alert(navigator.userAgent)
 
@@ -167,6 +173,9 @@ exports.default = {
           }
         }, _callee3, _this3);
       }))();
+    },
+    numToRem: function numToRem(num) {
+      return num / 100 + 'rem';
     }
   },
   filters: {}

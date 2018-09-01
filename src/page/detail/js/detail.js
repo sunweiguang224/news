@@ -34,6 +34,10 @@ export default {
 
     // ts.$route.params.contents
   },
-  methods: {},
+  methods: {
+    numToRem(num) {
+      return num / 100 + 'rem';
+    },
+  },
   filters: {},
 };

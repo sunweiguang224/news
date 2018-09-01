@@ -27,6 +27,12 @@ export default {
       // 页面内部状态
       categoryBarSwiper: null,
       newsListSwiper: null,
+
+      // 样式
+      style: {
+        titleBarHeight: 40,
+        categoryBarHeight: 36,
+      },
     };
   },
   computed: {},
@@ -38,7 +44,7 @@ export default {
   mounted () {
     let ts = this;
 
-    alert(this.$store.state.global.statusBarHeight);
+    // alert(this.$store.state.global.statusBarHeight);
 
     // alert(navigator.userAgent)
 
@@ -80,6 +86,9 @@ export default {
       if (cb) {
         cb();
       }
+    },
+    numToRem(num) {
+      return num / 100 + 'rem';
     },
   },
   filters: {},

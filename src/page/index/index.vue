@@ -1,14 +1,20 @@
 <template>
-  <div class="index">
+  <div class="index"
+    :style="{'padding-top': numToRem($store.state.global.statusBarHeight + style.titleBarHeight + style.categoryBarHeight)}">
 
     <!--顶部标题栏-->
-    <div class="title-bar">天天想看</div>
+    <div class="title-bar"
+      :style="{'padding-top': numToRem($store.state.global.statusBarHeight), 'height': numToRem(style.titleBarHeight), 'line-height': numToRem(style.titleBarHeight)}">
+      天天想看
+    </div>
 
     <!--分类栏-->
-    <div class="category-bar swiper-container" ref="categoryBar">
+    <div class="category-bar swiper-container" ref="categoryBar"
+         :style="{'top': numToRem($store.state.global.statusBarHeight + style.titleBarHeight)}">
       <div class="swiper-wrapper">
         <span class="swiper-slide" v-for="(item, i) in $store.state.index.categoryList"
               :class="{active: $store.state.index.category === item}"
+              :style="{'height': numToRem(style.categoryBarHeight), 'line-height': numToRem(style.categoryBarHeight)}"
               @click="newsListSwiper.slideTo(i);">
               <!--@click="changeCategoryTo(item);">-->
           {{item}}

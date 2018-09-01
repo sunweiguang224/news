@@ -4,10 +4,10 @@
 
 .app > .page.index {
 
-  $title-bar-height: r(40);
-  $category-bar-height: r(36);
+  //$title-bar-height: r(40);
+  //$category-bar-height: r(36);
 
-  padding-top: $title-bar-height + $category-bar-height;
+  //padding-top: $title-bar-height + $category-bar-height;
   box-sizing: border-box;
   height: 100%;
 
@@ -16,18 +16,24 @@
     top: 0;
     z-index: 2;
 
-    @include height($title-bar-height);
+    //@include height($title-bar-height);
     @include full-width;
 
     background: $color-subject;
     text-align: center;
     font-size: r(16);
     color: white;
+    /*&:before{
+      content: '';
+      display: block;
+      height: 1px;
+      background: green;
+    }*/
   }
 
   .category-bar {
     position: fixed;
-    top: $title-bar-height;
+    //top: $title-bar-height;
     background: white;
     z-index: 2;
     @include full-width;
@@ -50,7 +56,7 @@
         width: auto;
         padding: 0 r(10);
 
-        @include height($category-bar-height);
+        //@include height($category-bar-height);
 
         text-align: center;
         font-size: r(16);
