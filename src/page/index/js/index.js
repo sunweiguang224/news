@@ -2,11 +2,11 @@ import Swiper from 'swiper';
 import runtime from 'runtime';
 import date from 'date';
 import ua from 'ua';
-import console from 'console';
+// import console from 'console';
 
 
 export default {
-  async asyncData ({store, req, res}) {
+  async asyncData ({route, store, req, res}) {
     if (!store.state.index.newsList[store.state.index.category].list.length) {
       await store.dispatch('index/getNextPage', {req, res});
     }

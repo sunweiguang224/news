@@ -47,9 +47,7 @@ exports.default = {
       }, {
         name: 'detail',
         path: '/detail.html',
-        meta: {
-          title: '详情'
-        },
+        meta: {},
         // component: () => import(/* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue'),
         component: require('./detail/detail.vue').default,
         beforeEnter: function beforeEnter(to, from, next) {
@@ -66,8 +64,11 @@ exports.default = {
     // 全局后置钩子
     router.afterEach(function (to, from, next) {
       if (_runtime2.default.isClient()) {
+
         // 设置页面title
-        document.title = to.params && to.params.title || to.meta && to.meta.title;
+        if (to.meta && to.meta.title) {
+          document.title = to.meta.title;
+        }
 
         // 设置页面位置
         // const startPos = 0;

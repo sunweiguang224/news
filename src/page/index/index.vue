@@ -32,7 +32,8 @@
           >
             <div slot="list">
               <div class="news" v-for="(item, i) in $store.state.index.newsList[category].list"
-                @click="$router.push({name: 'detail', params: {title: item.title, news: item}});">
+                @click="$router.push({name: 'detail', query: {id: item.id}, params: {news: item}});">
+                <!--@click="$router.push({name: 'detail', params: {title: item.title, news: item}}, query);">-->
                 <div class="title">{{item.title}}</div>
                 <div class="imgs">
                   <div class="img-container" v-for="img in item.imgs">

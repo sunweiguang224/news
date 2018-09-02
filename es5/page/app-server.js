@@ -47,7 +47,8 @@ exports.default = function (context) {
           return Com.asyncData({
             req: context.req,
             res: context.res,
-            store: app.$store
+            store: app.$store,
+            route: app.$router.history.current
           });
         }
       })).then(function () {

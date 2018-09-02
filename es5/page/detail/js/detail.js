@@ -28,7 +28,8 @@ exports.default = {
   asyncData: function asyncData(_ref) {
     var _this = this;
 
-    var store = _ref.store,
+    var route = _ref.route,
+        store = _ref.store,
         req = _ref.req,
         res = _ref.res;
     return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
@@ -36,6 +37,24 @@ exports.default = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
+              if (!route.params.news) {
+                _context.next = 4;
+                break;
+              }
+
+              store.commit('detail/setNews', route.params.news);
+              _context.next = 6;
+              break;
+
+            case 4:
+              _context.next = 6;
+              return store.dispatch('detail/getNews', { req: req, res: res, id: route.query.id });
+
+            case 6:
+
+              route.meta.title = store.state.detail.news.title;
+
+            case 7:
             case 'end':
               return _context.stop();
           }
@@ -60,9 +79,9 @@ exports.default = {
   },
 
   computed: {
-    news: function news() {
-      return this.$route.params.news || {};
-    }
+    // news() {
+    //   return this.$route.params.news || {};
+    // },
   },
   watch: {},
   beforeCreate: function beforeCreate() {},

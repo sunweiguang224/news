@@ -24,19 +24,19 @@ var _ua = require('ua');
 
 var _ua2 = _interopRequireDefault(_ua);
 
-var _console = require('console');
-
-var _console2 = _interopRequireDefault(_console);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+// import console from 'console';
+
 
 exports.default = {
   asyncData: function asyncData(_ref) {
     var _this = this;
 
-    var store = _ref.store,
+    var route = _ref.route,
+        store = _ref.store,
         req = _ref.req,
         res = _ref.res;
     return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {

@@ -33,6 +33,7 @@ export default context => new Promise((resolve, reject) => {
           req: context.req,
           res: context.res,
           store: app.$store,
+          route: app.$router.history.current,
         });
       }
     })).then(() => {

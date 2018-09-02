@@ -29,6 +29,7 @@ export default {
   log(text, {req} = {}) {
     console.log();
     console.log(getPrefix('log', {req}), text);
+    console.log('wwwwwwwwwwww');
   },
 
   /**

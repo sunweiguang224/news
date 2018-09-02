@@ -3,7 +3,7 @@ import type from 'type';
 import runtime from 'runtime';
 // import encrypt from 'dvd-service-js-encrypt';
 import urlParse from 'url-parse';
-import console from 'console';
+import console from 'console1';
 
 // 对象转cookie格式字符串
 function objectToCookieStr(cookies) {
@@ -161,9 +161,10 @@ export default {
     try {
       let start = Date.now();
       response = await axios.request(options);
-      // console.log(`请求发送->返回共耗时：${Date.now() - start}ms (${options.url})`, {req});
+      console.log(`请求发送->返回共耗时：${Date.now() - start}ms (${options.url})`, {req});
+      console.log(console);
     } catch (err) {
-      // console.error(`调用接口发生错误：(${options.url})`, {req});
+      console.error(`调用接口发生错误：(${options.url})`, {req});
       // 兼容jquery的回调写法
       if (oldOptions.error) {
         oldOptions.error(err);
@@ -185,10 +186,10 @@ export default {
     // 如果是服务端
     if (runtime.isServer()) {
       // 接口返回code不为0时，自动打出error log
-      if (response.data && parseInt(response.data.code) !== 0) {
+     /* if (response.data && parseInt(response.data.code) !== 0) {
         // console.log(`发现接口返回code码不为0：\n${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
-        // console.log(`发现接口返回code码不为0：↓`, {req});
-      }
+        console.log(`发现接口返回code码不为0：↓`, {req});
+      }*/
 
       // if (debug || '[[env]]'.toString() !== 'prod') {
       // console.log(`接口请求信息（${options.url}）：${JSON.stringify(simpleResponse, ' ', 2)}`, {req});

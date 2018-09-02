@@ -28,178 +28,61 @@ exports.default = {
   namespaced: true,
   state: function state() {
     return {
-      categoryList: ['推荐', '娱乐', '生活', '体育', '军事', '科技', '互联网', '国际', '国内', '人文', '汽车', '财经', '房产', '时尚'],
-      newsList: {
-        '推荐': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '娱乐': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '生活': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '体育': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '军事': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '科技': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '互联网': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '国际': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '国内': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '人文': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '汽车': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '财经': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '房产': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        },
-        '时尚': {
-          list: [],
-          pageNo: 0,
-          pageSize: 10,
-          isOver: false
-        }
-      },
-      category: '推荐'
+      news: null
     };
   },
 
   mutations: {
-    setCategory: function setCategory(state, data) {
-      state.category = data;
-    },
-    prependNewsList: function prependNewsList(state, data) {
-      var newNewsList = JSON.parse(JSON.stringify(state.newsList[data.category]));
-      newNewsList.list = data.newsList.concat(newNewsList.list);
-      newNewsList.pageNo += 1;
-      newNewsList.isOver += false;
-      state.newsList[data.category] = newNewsList;
-    },
-    appendNewsList: function appendNewsList(state, data) {
-      var newNewsList = JSON.parse(JSON.stringify(state.newsList[data.category]));
-      newNewsList.list = newNewsList.list.concat(data.newsList);
-      newNewsList.pageNo += 1;
-      newNewsList.isOver += false;
-      state.newsList[data.category] = newNewsList;
+    setNews: function setNews(state, data) {
+      state.news = data;
     }
   },
-  getters: {
-    categoryIndex: function categoryIndex(state) {
-      for (var i in state.categoryList) {
-        if (state.category === state.categoryList[i]) {
-          return i;
-        }
-      }
-      return 0;
-    }
-  },
+  getters: {},
   actions: {
-    getNextPage: function getNextPage(context) {
+    /**
+     * 获取新闻详情
+     * @param context
+     * @param req
+     * @param res
+     * @param id
+     * @return {Promise.<void>}
+     */
+    getNews: function getNews(context) {
       var _this = this;
 
       var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
           req = _ref.req,
           res = _ref.res,
-          _ref$type = _ref.type,
-          type = _ref$type === undefined ? 'append' : _ref$type;
+          id = _ref.id;
 
       return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-        var category, newsList, list;
+        var news;
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                category = context.state.category;
-                newsList = context.state.newsList[category];
-                _context.next = 4;
+                _context.next = 2;
                 return _ajax2.default.send({
                   type: 'get',
-                  url: 'http://' + (_runtime2.default.isServer() ? 'localhost' : location.hostname) + ':8100/api/queryNewsList',
+                  url: 'http://' + (_runtime2.default.isServer() ? 'localhost' : location.hostname) + ':8100/api/queryNewsDetail',
                   dataType: 'json',
                   // data: {
                   //   category: context.state.category,
                   // },
                   params: {
-                    category: category,
-                    pageNo: newsList.pageNo + 1,
-                    pageSize: newsList.pageSize
+                    id: id
                   }
                 }, { req: req, res: res });
 
+              case 2:
+                news = _context.sent;
+
+
+                // console.log(news)
+
+                context.commit('setNews', news);
+
               case 4:
-                list = _context.sent;
-
-
-                console.log(list);
-
-                if (type == 'append') {
-                  context.commit('appendNewsList', {
-                    category: category,
-                    newsList: list
-                  });
-                } else if (type == 'prepend') {
-                  context.commit('prependNewsList', {
-                    category: category,
-                    newsList: list
-                  });
-                }
-
-              case 7:
               case 'end':
                 return _context.stop();
             }

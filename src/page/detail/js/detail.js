@@ -3,7 +3,14 @@ import runtime from 'runtime';
 import date from 'date';
 
 export default {
-  async asyncData ({store, req, res}) {
+  async asyncData ({route, store, req, res}) {
+    if (route.params.news) {
+      store.commit('detail/setNews', route.params.news);
+    } else {
+      await store.dispatch('detail/getNews', {req, res, id: route.query.id});
+    }
+
+    route.meta.title = store.state.detail.news.title;
   },
   components: {},
   props: {},
@@ -20,9 +27,9 @@ export default {
     };
   },
   computed: {
-    news() {
-      return this.$route.params.news || {};
-    },
+    // news() {
+    //   return this.$route.params.news || {};
+    // },
   },
   watch: {},
   beforeCreate () {
