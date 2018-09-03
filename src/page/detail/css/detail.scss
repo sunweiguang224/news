@@ -3,8 +3,6 @@
 //@import "../../../../node_modules/swiper/dist/css/swiper";
 
 .app > .page.detail {
-  padding: 0 0 r(30);
-  z-index: 11;
 
   /* 页面显示|离开动画 */
   @keyframes detail-enter-animation{
@@ -30,14 +28,13 @@
   .status-bar {
     position: fixed;
     top: 0;
+    background: white;
 
     @include full-width;
-
-    background: $color-subject;
   }
 
   .contents {
-    padding: r(10);
+    padding: r(10) r(10) r(30);
 
     .title {
       padding: r(10) 0;

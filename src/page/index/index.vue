@@ -3,9 +3,12 @@
     <div class="index"
       :style="{'padding-top': numToRem($store.state.global.statusBarHeight + style.titleBarHeight + style.categoryBarHeight)}">
 
+      <!--app状态栏-->
+      <div class="status-bar" :style="{height: numToRem($store.state.global.statusBarHeight)}"></div>
+
       <!--顶部标题栏-->
       <div class="title-bar"
-        :style="{'padding-top': numToRem($store.state.global.statusBarHeight), 'height': numToRem(style.titleBarHeight), 'line-height': numToRem(style.titleBarHeight)}">
+        :style="{'top': numToRem($store.state.global.statusBarHeight), 'height': numToRem(style.titleBarHeight), 'line-height': numToRem(style.titleBarHeight)}">
         天天想看
       </div>
 

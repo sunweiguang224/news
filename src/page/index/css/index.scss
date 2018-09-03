@@ -4,7 +4,6 @@
 
 .app > .page.index {
   box-sizing: border-box;
-  height: 100%;
 
   /* 页面显示|离开动画 */
   @keyframes index-enter-animation {
@@ -27,6 +26,14 @@
     animation: index-leave-animation 0.5s;
   }
 
+  .status-bar {
+    position: fixed;
+    top: 0;
+    background: white;
+
+    @include full-width;
+  }
+
   .title-bar {
     position: fixed;
     top: 0;
@@ -34,10 +41,9 @@
 
     @include full-width;
 
-    background: $color-subject;
     text-align: center;
     font-size: r(16);
-    color: white;
+    color: $color-subject;
   }
 
   .category-bar {
