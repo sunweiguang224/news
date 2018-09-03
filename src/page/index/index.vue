@@ -31,20 +31,38 @@
            :list-length="$store.state.index.newsList[category].list.length"
           >
             <div slot="list">
-              <div class="news" v-for="(item, i) in $store.state.index.newsList[category].list"
-                @click="$router.push({name: 'detail', query: {id: item.id}, params: {news: item}});">
-                <!--@click="$router.push({name: 'detail', params: {title: item.title, news: item}}, query);">-->
-                <div class="title">{{item.title}}</div>
-                <div class="imgs">
+              <!--模板-->
+              <template v-for="(item, i) in $store.state.index.newsList[category].list">
+
+                <!--多图模板-->
+                <div class="news multi" v-if="item.imgs.length > 1" @click="$router.push({name: 'detail', query: {id: item.id}, params: {news: item}});">
+                    <div class="title">{{item.title}}</div>
+                    <div class="imgs">
+                      <div class="img-container" v-for="img in item.imgs">
+                        <img :src="img" alt="想看">
+                      </div>
+                    </div>
+                    <div class="attrs">
+                      <span class="attr">{{item.author}}</span>
+                      <span class="attr">{{date.format(item.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
+                    </div>
+                </div>
+
+                <!--单图模板-->
+                <div class="news single" v-else-if="item.imgs.length === 1" @click="$router.push({name: 'detail', query: {id: item.id}, params: {news: item}});">
+                  <div class="info">
+                    <div class="title">{{item.title}}</div>
+                    <div class="attrs">
+                      <span class="attr">{{item.author}}</span>
+                      <span class="attr">{{date.format(item.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
+                    </div>
+                  </div>
                   <div class="img-container" v-for="img in item.imgs">
                     <img :src="img" alt="想看">
                   </div>
                 </div>
-                <div class="attrs">
-                  <span class="attr">{{item.author}}</span>
-                  <span class="attr">{{date.format(item.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
-                </div>
-              </div>
+
+              </template>
             </div>
           </dvd-service-com-paging-list>
 

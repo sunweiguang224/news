@@ -83,7 +83,7 @@
 
           .title {
             padding: r(10) 0;
-            font-size: r(20);
+            font-size: r(18);
             line-height: 1.2;
             @include ellipsis(2);
           }
@@ -101,7 +101,7 @@
               }
 
               img {
-                max-width: 100%;
+                width: 100%;
                 height: r(78);
               }
             }
@@ -113,6 +113,26 @@
             color: #999;
             .attr {
               margin-right: r(5);
+            }
+          }
+
+          &.single {
+            display: flex;
+            padding: r(10) 0;
+
+            .info {
+              flex: 1;
+            }
+
+            .img-container {
+              margin-left: r(10);
+              padding-top: r(10);
+              width: r(116);
+
+              img {
+                width: 100%;
+                height: r(74);
+              }
             }
           }
         }

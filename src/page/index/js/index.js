@@ -59,25 +59,24 @@ export default {
       on: {
         // 滚动至category对应列表时，更新category-bar和列表数据
         slideChangeTransitionStart () {
+          // 获取下一个category
           let category = ts.$store.state.index.categoryList[this.activeIndex];
-          ts.changeCategoryTo(category);
+
+          // 更改category
+          ts.$store.commit('index/setCategory', category);
+
+          // 选中的category居中显示
+          ts.categoryBarSwiper.slideTo(this.activeIndex - 3);
+
+          // 获取category对应列表的首屏数据
+          if (!ts.$store.state.index.newsList[category].list.length) {
+            ts.getNextPage();
+          }
         }
       },
     });
   },
   methods: {
-    async changeCategoryTo (category) {
-      // 更改category
-      this.$store.commit('index/setCategory', category);
-
-      // // 新闻列表切换到category对应的列表
-      // this.newsListSwiper.slideTo(this.$store.getters['index/categoryIndex']);
-
-      // category对应的列表如果空的，获取数据，然后更新分页swiper
-      if (!this.$store.state.index.newsList[category].list.length) {
-        this.getNextPage();
-      }
-    },
     async getNextPage ({cb, type} = {}) {
       await this.$store.dispatch('index/getNextPage', {
         type,

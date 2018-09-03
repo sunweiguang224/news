@@ -16,7 +16,7 @@
         <span class="attr">{{$store.state.detail.news.author}}</span>
         <span class="attr">{{date.format($store.state.detail.news.time, 'yyyy-MM-dd hh:mm:ss')}}</span>
       </span>
-        <span class="right"><a :href="$store.state.detail.news.link">查看原文</a></span>
+      <span class="right"></span>
       </div>
 
       <!--正文-->
@@ -26,6 +26,9 @@
           <img :src="item.url" alt="天天想看">
         </div>
       </template>
+
+      <!--查看原文-->
+      <div class="link"><a :href="$store.state.detail.news.link">查看原文</a></div>
     </div>
   </div>
 </template>

@@ -108,70 +108,54 @@ exports.default = {
       on: {
         // 滚动至category对应列表时，更新category-bar和列表数据
         slideChangeTransitionStart: function slideChangeTransitionStart() {
+          // 获取下一个category
           var category = ts.$store.state.index.categoryList[this.activeIndex];
-          ts.changeCategoryTo(category);
+
+          // 更改category
+          ts.$store.commit('index/setCategory', category);
+
+          // 选中的category居中显示
+          ts.categoryBarSwiper.slideTo(this.activeIndex - 3);
+
+          // 获取category对应列表的首屏数据
+          if (!ts.$store.state.index.newsList[category].list.length) {
+            ts.getNextPage();
+          }
         }
       }
     });
   },
 
   methods: {
-    changeCategoryTo: function changeCategoryTo(category) {
+    getNextPage: function getNextPage() {
       var _this2 = this;
+
+      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          cb = _ref2.cb,
+          type = _ref2.type;
 
       return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
         return _regenerator2.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                // 更改category
-                _this2.$store.commit('index/setCategory', category);
-
-                // // 新闻列表切换到category对应的列表
-                // this.newsListSwiper.slideTo(this.$store.getters['index/categoryIndex']);
-
-                // category对应的列表如果空的，获取数据，然后更新分页swiper
-                if (!_this2.$store.state.index.newsList[category].list.length) {
-                  _this2.getNextPage();
-                }
-
-              case 2:
-              case 'end':
-                return _context2.stop();
-            }
-          }
-        }, _callee2, _this2);
-      }))();
-    },
-    getNextPage: function getNextPage() {
-      var _this3 = this;
-
-      var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
-          cb = _ref2.cb,
-          type = _ref2.type;
-
-      return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
-        return _regenerator2.default.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                _context3.next = 2;
-                return _this3.$store.dispatch('index/getNextPage', {
+                _context2.next = 2;
+                return _this2.$store.dispatch('index/getNextPage', {
                   type: type
                 });
 
               case 2:
-                _this3.$refs.newsList[_this3.$store.getters['index/categoryIndex']].swiper.update();
+                _this2.$refs.newsList[_this2.$store.getters['index/categoryIndex']].swiper.update();
                 if (cb) {
                   cb();
                 }
 
               case 4:
               case 'end':
-                return _context3.stop();
+                return _context2.stop();
             }
           }
-        }, _callee3, _this3);
+        }, _callee2, _this2);
       }))();
     },
     numToRem: function numToRem(num) {
