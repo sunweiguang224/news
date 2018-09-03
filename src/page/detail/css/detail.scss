@@ -4,6 +4,28 @@
 
 .app > .page.detail {
   padding: 0 0 r(30);
+  z-index: 11;
+
+  /* 页面显示|离开动画 */
+  @keyframes detail-enter-animation{
+    0% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes detail-leave-animation{
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  &.detail-enter-active {
+    animation: detail-enter-animation 0.5s;
+  }
+
+  &.detail-leave-active {
+    animation: detail-leave-animation 0.5s;
+  }
 
   .status-bar {
     position: fixed;

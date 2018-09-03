@@ -42,14 +42,6 @@ body {
   font-weight: 400;
 }
 
-.app {
-  margin: auto;
-  min-width: $pageMinWidth;
-  max-width: $pageMaxWidth;
-  position: relative;
-  overflow-x: hidden;
-}
-
 [v-cloak] {
   display: none;
 }
@@ -73,4 +65,20 @@ body {
 
 :-ms-input-placeholder { /* Internet Explorer 10+ */
   color: #999;
+}
+
+.app {
+  margin: auto;
+  min-width: $pageMinWidth;
+  max-width: $pageMaxWidth;
+  height: 100%;
+  position: relative;
+  overflow-x: hidden;
+
+  > .page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
 }

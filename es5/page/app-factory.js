@@ -34,21 +34,35 @@ exports.default = {
       store: _store2.default.create({ req: req, res: res }),
       render: function render(createElement) {
         return createElement(
-        // 应用容器
+        // app应用容器
         'div', {
           class: {
             app: true
           }
         }, [
+        // // 过度
+        // createElement(
+        //   'transition',
+        //   {
+        //     attrs: {
+        //       name: 'show',
+        //     },
+        //   },
+        //   [
+        // 缓存
+        createElement('keep-alive', {}, [
         // 页面容器
-        createElement('keep-alive', {}, [createElement('router-view', {
+        createElement('router-view', {
           class: {
             page: true
           },
           attrs: {
             req: req
           }
-        })]),
+        })]
+        //   ),
+        // ],
+        ),
         // 全局弹窗容器
         createElement('div', {
           class: {
