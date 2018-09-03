@@ -1,7 +1,8 @@
 <!--分页组件，触底显示loading并加载下一页，结束时显示结束状态。-->
 <template>
   <!--垂直滑动-->
-  <div class="swiper-container dvd-service-com-paging-list" :style="{height: listHeight}">
+  <div class="swiper-container dvd-service-com-paging-list" :style="{height: listHeight}"
+       @click.capture="stopScrolling">
     <div class="swiper-wrapper" ref="wrapper">
 
       <!--下拉加载更多-->

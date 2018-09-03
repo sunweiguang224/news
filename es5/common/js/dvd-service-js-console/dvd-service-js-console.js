@@ -45,7 +45,6 @@ exports.default = {
 
     console.log();
     console.log(getPrefix('log', { req: req }), text);
-    console.log('wwwwwwwwwwww');
   },
 
 

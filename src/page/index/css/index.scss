@@ -93,6 +93,11 @@
 
           @include v-list-split-line;
 
+          img {
+            background: url(../../common/icon/lazyload-flat.png) no-repeat center;
+            background-size: cover;
+          }
+
           .title {
             font-size: r(18);
             line-height: 1.2;

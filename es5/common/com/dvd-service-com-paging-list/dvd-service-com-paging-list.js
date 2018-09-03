@@ -66,7 +66,10 @@ exports.default = {
       ifShowLoadMore: false,
 
       // 时间间隔，不允许频繁触发下一页
-      isInMinInterver: false
+      isInMinInterver: false,
+
+      // 停止滚动定时器
+      stopScrollingTimeout: null
     };
   },
 
@@ -87,6 +90,8 @@ exports.default = {
 
     // 触底加载下一页
     var ifGetData = function ifGetData() {
+      console.log(1);
+
       if (ts.ajaxing || ts.isInMinInterver) {
         return;
       }
@@ -117,9 +122,9 @@ exports.default = {
       direction: 'vertical',
       setWrapperSize: true,
       // 松手后滚动时间
-      freeModeMomentumRatio: 1.5,
+      freeModeMomentumRatio: 1.2,
       // 松手后滚动速度
-      freeModeMomentumVelocityRatio: 1,
+      freeModeMomentumVelocityRatio: 1.2,
       on: {
         // 非正式反弹回调函数
         momentumBounce: ifGetData,
@@ -187,6 +192,19 @@ exports.default = {
         cb: cb,
         type: type
       });
+    },
+
+    /**
+     * 手指按下停止滚动
+     */
+    stopScrolling: function stopScrolling(event) {
+      if (this.swiper.animating) {
+        this.swiper.setTranslate(this.swiper.getTranslate());
+        this.swiper.animating = false;
+        this.$refs.wrapper.style.transitionDuration = '0ms';
+        event.stopPropagation();
+        event.preventDefault();
+      }
     }
   }
 };

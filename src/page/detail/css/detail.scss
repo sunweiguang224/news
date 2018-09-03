@@ -36,6 +36,11 @@
   .contents {
     padding: r(10) r(10) r(30);
 
+    img {
+      background: url(../../common/icon/lazyload-square.png) no-repeat center;
+      background-size: cover;
+    }
+
     .title {
       padding: r(10) 0;
       font-size: r(22);
