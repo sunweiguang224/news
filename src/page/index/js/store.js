@@ -148,7 +148,7 @@ export default {
 
       let list = await ajax.send({
         type: 'get',
-        url: `http://${runtime.isServer() ? 'localhost' : location.hostname}:8100/api/queryNewsList`,
+        url: `/api/queryNewsList`,
         dataType: 'json',
         // data: {
         //   category: context.state.category,

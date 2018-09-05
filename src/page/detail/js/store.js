@@ -29,7 +29,7 @@ export default {
 
       let news = await ajax.send({
         type: 'get',
-        url: `http://${runtime.isServer() ? 'localhost' : location.hostname}:8100/api/queryNewsDetail`,
+        url: `/api/queryNewsDetail`,
         dataType: 'json',
         // data: {
         //   category: context.state.category,

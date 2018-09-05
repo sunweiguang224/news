@@ -169,7 +169,7 @@ exports.default = {
                 _context.next = 4;
                 return _ajax2.default.send({
                   type: 'get',
-                  url: 'http://' + (_runtime2.default.isServer() ? 'localhost' : location.hostname) + ':8100/api/queryNewsList',
+                  url: '/api/queryNewsList',
                   dataType: 'json',
                   // data: {
                   //   category: context.state.category,

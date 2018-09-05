@@ -107,7 +107,7 @@ exports.default = {
         debug = _ref$debug === undefined ? false : _ref$debug;
 
     return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-      var oldOptions, _arr, _i, key, value, url, response, start, simpleResponse, jump, forceUrl, forceDomain, _forceUrl, _arr2, _i2, _key, _value;
+      var oldOptions, _arr, _i, key, value, _url, url, response, start, simpleResponse, jump, forceUrl, forceDomain, _forceUrl, _arr2, _i2, _key, _value;
 
       return _regenerator2.default.wrap(function _callee$(_context) {
         while (1) {
@@ -159,10 +159,11 @@ exports.default = {
                 }
 
                 // 使用用户终端当前域名请求接口
-                url = (0, _urlParse2.default)(options.url);
+                _url = (0, _urlParse2.default)(options.url);
 
+                // 协议后面的//
 
-                url.slashes = true;
+                _url.slashes = true;
 
                 /*// 如果在服务器上
                 if (runtime.isLinux()) {
@@ -189,14 +190,28 @@ exports.default = {
                   url.host = req.hostname;
                 }*/
 
-                // 转化成最终请求url
-                options.url = url.toString();
+                // url.protocol = 'http';
+                // url.host = `${runtime.isServer() ? req.hostname : location.hostname}:8100`;
+                //
+                // // 转化成最终请求url
+                // options.url = url.toString();
 
                 // 环境号
                 if ('[[num]]') {
                   options.headers.rootflag = '[[num]]';
                 }
               }
+
+              url = (0, _urlParse2.default)(options.url);
+              // 协议后面的//
+
+              url.slashes = true;
+              url.protocol = 'http';
+              url.host = (_runtime2.default.isServer() ? req.hostname : location.hostname) + ':8100';
+              // 转化成最终请求url
+              options.url = url.toString();
+
+              _console2.default.log(options.url);
 
               // 防止出错时查不到请求参数
               // console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
@@ -206,22 +221,22 @@ exports.default = {
 
               // 发送请求
               response = null;
-              _context.prev = 7;
+              _context.prev = 13;
               start = Date.now();
-              _context.next = 11;
+              _context.next = 17;
               return _axios2.default.request(options);
 
-            case 11:
+            case 17:
               response = _context.sent;
 
               _console2.default.log('\u8BF7\u6C42\u53D1\u9001->\u8FD4\u56DE\u5171\u8017\u65F6\uFF1A' + (Date.now() - start) + 'ms (' + options.url + ')', { req: req });
               _console2.default.log(_console2.default);
-              _context.next = 21;
+              _context.next = 27;
               break;
 
-            case 16:
-              _context.prev = 16;
-              _context.t0 = _context['catch'](7);
+            case 22:
+              _context.prev = 22;
+              _context.t0 = _context['catch'](13);
 
               _console2.default.error('\u8C03\u7528\u63A5\u53E3\u53D1\u751F\u9519\u8BEF\uFF1A(' + options.url + ')', { req: req });
               // 兼容jquery的回调写法
@@ -230,7 +245,7 @@ exports.default = {
               }
               throw new Error(_context.t0);
 
-            case 21:
+            case 27:
 
               // 接口信息，只有request属性没有打印（request内部多数属性都是对象和方法，信息类型的属性很少）
               simpleResponse = {
@@ -302,12 +317,12 @@ exports.default = {
 
               return _context.abrupt('return', response.data);
 
-            case 26:
+            case 32:
             case 'end':
               return _context.stop();
           }
         }
-      }, _callee, _this, [[7, 16]]);
+      }, _callee, _this, [[13, 22]]);
     }))();
   }
 };

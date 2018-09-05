@@ -109,6 +109,7 @@ export default {
       // 使用用户终端当前域名请求接口
       let url = urlParse(options.url);
 
+      // 协议后面的//
       url.slashes = true;
 
       /*// 如果在服务器上
@@ -141,14 +142,28 @@ export default {
         url.host = req.hostname;
       }*/
 
-      // 转化成最终请求url
-      options.url = url.toString();
+      // url.protocol = 'http';
+      // url.host = `${runtime.isServer() ? req.hostname : location.hostname}:8100`;
+      //
+      // // 转化成最终请求url
+      // options.url = url.toString();
 
       // 环境号
       if ('[[num]]') {
         options.headers.rootflag = '[[num]]';
       }
     }
+
+
+    let url = urlParse(options.url);
+    // 协议后面的//
+    url.slashes = true;
+    url.protocol = 'http';
+    url.host = `${runtime.isServer() ? req.hostname : location.hostname}:8100`;
+    // 转化成最终请求url
+    options.url = url.toString();
+
+    console.log(options.url);
 
     // 防止出错时查不到请求参数
     // console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
