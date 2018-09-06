@@ -3,7 +3,7 @@ import runtime from 'runtime';
 import date from 'date';
 import ua from 'ua';
 // import console from 'console';
-
+import weixin from '../../../common/js/weixin/weixin.js';
 
 export default {
   async asyncData ({route, store, req, res}) {
@@ -76,6 +76,18 @@ export default {
       },
     });
   },
+
+  // 客户端首次进入或每次路由切换时触发
+  async enteredInClient() {
+    debugger
+
+    await weixin.init();
+
+    weixin.setShareInfo({
+      title: '首页11',
+    });
+  },
+
   methods: {
     async getNextPage ({cb, type} = {}) {
       await this.$store.dispatch('index/getNextPage', {

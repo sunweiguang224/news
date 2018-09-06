@@ -3,6 +3,14 @@ import factory from './app-factory.js';
 // 创建vue实例
 let app = factory.create();
 
+function enteredInClient(){
+  app.$router.getMatchedComponents().map(c => {
+    if (c.enteredInClient) {
+      return c.enteredInClient();
+    }
+  });
+}
+
 app.$router.onReady(() => {
 
   // 客户端状态与服务端同步
@@ -21,11 +29,16 @@ app.$router.onReady(() => {
       }
     })).then(() => {
       next();
+
+      enteredInClient();
     }).catch(next);
   });
 
   // 挂载组件
   app.$mount('.app');
+
+  // 触发
+  enteredInClient();
 });
 
 

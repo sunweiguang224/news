@@ -154,12 +154,21 @@ export default {
       }
     }
 
-
     let url = urlParse(options.url);
     // 协议后面的//
     url.slashes = true;
     url.protocol = 'http';
+
     url.host = `${runtime.isServer() ? req.hostname : location.hostname}:8100`;
+
+    // // 测试微信分享文案使用
+    // if(options.url.indexOf('/api/') !== -1){
+    //   url.host = `localhost:8100`;
+    // }
+    // if(options.url.indexOf('/wechatJsToken') !== -1){
+    //   url.host = `18686604386.davdian.com:6001`;
+    // }
+
     // 转化成最终请求url
     options.url = url.toString();
 

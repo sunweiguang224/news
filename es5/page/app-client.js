@@ -9,6 +9,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // 创建vue实例
 var app = _appFactory2.default.create();
 
+function enteredInClient() {
+  app.$router.getMatchedComponents().map(function (c) {
+    if (c.enteredInClient) {
+      return c.enteredInClient();
+    }
+  });
+}
+
 app.$router.onReady(function () {
 
   // 客户端状态与服务端同步
@@ -27,11 +35,16 @@ app.$router.onReady(function () {
       }
     })).then(function () {
       next();
+
+      enteredInClient();
     }).catch(next);
   });
 
   // 挂载组件
   app.$mount('.app');
+
+  // 触发
+  enteredInClient();
 });
 
 // 从其他项目返回当前项目时，刷新页面（某些机型缓存的不是上次history方式访问的页面内容，而是上次refresh方式的内容）

@@ -24,10 +24,13 @@ var _ua = require('ua');
 
 var _ua2 = _interopRequireDefault(_ua);
 
+var _weixin = require('../../../common/js/weixin/weixin.js');
+
+var _weixin2 = _interopRequireDefault(_weixin);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
 // import console from 'console';
 
 
@@ -126,36 +129,67 @@ exports.default = {
     });
   },
 
+
+  // 客户端首次进入或每次路由切换时触发
+  enteredInClient: function enteredInClient() {
+    var _this2 = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+      return _regenerator2.default.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              debugger;
+
+              _context2.next = 3;
+              return _weixin2.default.init();
+
+            case 3:
+
+              _weixin2.default.setShareInfo({
+                title: '首页11'
+              });
+
+            case 4:
+            case 'end':
+              return _context2.stop();
+          }
+        }
+      }, _callee2, _this2);
+    }))();
+  },
+
+
   methods: {
     getNextPage: function getNextPage() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
           cb = _ref2.cb,
           type = _ref2.type;
 
-      return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
-        return _regenerator2.default.wrap(function _callee2$(_context2) {
+      return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee3() {
+        return _regenerator2.default.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
-                return _this2.$store.dispatch('index/getNextPage', {
+                _context3.next = 2;
+                return _this3.$store.dispatch('index/getNextPage', {
                   type: type
                 });
 
               case 2:
-                _this2.$refs.newsList[_this2.$store.getters['index/categoryIndex']].swiper.update();
+                _this3.$refs.newsList[_this3.$store.getters['index/categoryIndex']].swiper.update();
                 if (cb) {
                   cb();
                 }
 
               case 4:
               case 'end':
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2, _this2);
+        }, _callee3, _this3);
       }))();
     },
     numToRem: function numToRem(num) {

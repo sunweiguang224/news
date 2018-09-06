@@ -1,6 +1,7 @@
 import Swiper from 'swiper';
 import runtime from 'runtime';
 import date from 'date';
+import weixin from '../../../common/js/weixin/weixin.js';
 
 export default {
   async asyncData ({route, store, req, res}) {
@@ -41,6 +42,18 @@ export default {
 
     // ts.$route.params.contents
   },
+
+  // 客户端首次进入或每次路由切换时触发
+  async enteredInClient() {
+    debugger
+
+    await weixin.init();
+
+    weixin.setShareInfo({
+      title: '新闻详情页',
+    });
+  },
+
   methods: {
     numToRem(num) {
       return num / 100 + 'rem';
