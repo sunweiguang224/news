@@ -10,21 +10,19 @@ var _regenerator2 = _interopRequireDefault(_regenerator);
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var _scriptjs = require('scriptjs');
+var _ajax = require('ajax');
 
-var _scriptjs2 = _interopRequireDefault(_scriptjs);
+var _ajax2 = _interopRequireDefault(_ajax);
 
-var _dvdServiceJsAjax = require('dvd-service-js-ajax');
+var _runtime = require('runtime');
 
-var _dvdServiceJsAjax2 = _interopRequireDefault(_dvdServiceJsAjax);
-
-var _dvdBaseJsRuntime = require('dvd-base-js-runtime');
-
-var _dvdBaseJsRuntime2 = _interopRequireDefault(_dvdBaseJsRuntime);
+var _runtime2 = _interopRequireDefault(_runtime);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+var scriptjs = _runtime2.default.isClient() ? require('scriptjs') : {};
 
 exports.default = {
   // weixin-js-sdk 原始对象
@@ -74,7 +72,7 @@ exports.default = {
           switch (_context2.prev = _context2.next) {
             case 0:
               return _context2.abrupt('return', new Promise(function (resolve, reject) {
-                (0, _scriptjs2.default)('//res.wx.qq.com/open/js/jweixin-1.4.0.js', function () {
+                scriptjs('//res.wx.qq.com/open/js/jweixin-1.4.0.js', function () {
                   _this2.wx = window.wx;
                   resolve();
                 }, reject);
@@ -100,7 +98,7 @@ exports.default = {
           switch (_context3.prev = _context3.next) {
             case 0:
               return _context3.abrupt('return', new Promise(function (resolve, reject) {
-                _dvdServiceJsAjax2.default.send({
+                _ajax2.default.send({
                   type: 'get',
                   url: '/wechatJsToken?url=' + encodeURIComponent(encodeURIComponent(location.href)) + '&_=' + Date.now(),
                   dataType: 'json'

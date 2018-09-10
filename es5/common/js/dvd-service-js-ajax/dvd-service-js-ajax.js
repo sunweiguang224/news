@@ -142,7 +142,13 @@ exports.default = {
                 data: serialize(options.data),
                 // 如果有req参数则表示是服务端，发送请求时带上用户的headers（模拟用户的身份发送请求）
                 // headers: Object.assign({}, req && req.headers || {}, options.headers || {}),
-                headers: {}
+                headers: {},
+
+                // 接口代理
+                proxy: {
+                  host: 'localhost',
+                  port: 8888
+                }
               };
 
               // 如果是服务端
@@ -207,7 +213,18 @@ exports.default = {
 
               url.slashes = true;
               url.protocol = 'http';
-              url.host = (_runtime2.default.isServer() ? req.hostname : location.hostname) + ':8100';
+              // url.protocol = req.protocol;
+
+              url.host = '' + (_runtime2.default.isServer() ? req.hostname : location.hostname);
+
+              // // 测试微信分享文案使用
+              // if(options.url.indexOf('/api/') !== -1){
+              //   url.host = `localhost:8100`;
+              // }
+              // if(options.url.indexOf('/wechatJsToken') !== -1){
+              //   url.host = `18686604386.davdian.com:6001`;
+              // }
+
               // 转化成最终请求url
               options.url = url.toString();
 

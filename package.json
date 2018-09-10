@@ -2,7 +2,10 @@
   "name": "news",
   "version": "0.0.1",
   "description": "",
-  "port": 7000,
+  "port": {
+    "http": 8000,
+    "https": 9000
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sunweiguang224/news.git"

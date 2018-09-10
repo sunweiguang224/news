@@ -94,6 +94,12 @@ export default {
       // 如果有req参数则表示是服务端，发送请求时带上用户的headers（模拟用户的身份发送请求）
       // headers: Object.assign({}, req && req.headers || {}, options.headers || {}),
       headers: {},
+
+      // 接口代理
+      proxy: {
+        host: 'localhost',
+        port: 8888,
+      },
     };
 
     // 如果是服务端
@@ -158,8 +164,9 @@ export default {
     // 协议后面的//
     url.slashes = true;
     url.protocol = 'http';
+    // url.protocol = req.protocol;
 
-    url.host = `${runtime.isServer() ? req.hostname : location.hostname}:8100`;
+    url.host = `${runtime.isServer() ? req.hostname : location.hostname}`;
 
     // // 测试微信分享文案使用
     // if(options.url.indexOf('/api/') !== -1){

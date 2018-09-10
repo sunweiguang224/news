@@ -99,6 +99,12 @@ exports.default = {
 
   // 客户端首次进入或每次路由切换时触发
   enteredInClient: function enteredInClient() {
+    // await weixin.init();
+
+    // weixin.setShareInfo({
+    //   title: '新闻详情页',
+    // });
+
     var _this2 = this;
 
     return _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
@@ -106,18 +112,6 @@ exports.default = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              debugger;
-
-              _context2.next = 3;
-              return _weixin2.default.init();
-
-            case 3:
-
-              _weixin2.default.setShareInfo({
-                title: '首页11'
-              });
-
-            case 4:
             case 'end':
               return _context2.stop();
           }

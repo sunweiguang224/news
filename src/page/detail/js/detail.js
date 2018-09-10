@@ -45,13 +45,11 @@ export default {
 
   // 客户端首次进入或每次路由切换时触发
   async enteredInClient() {
-    debugger
+    // await weixin.init();
 
-    await weixin.init();
-
-    weixin.setShareInfo({
-      title: '新闻详情页',
-    });
+    // weixin.setShareInfo({
+    //   title: '新闻详情页',
+    // });
   },
 
   methods: {
