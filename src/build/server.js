@@ -80,6 +80,18 @@ app.use((err, req, res, next) => {
 // 预先创建渲染器
 let bundleRenderer = config.env.env ? bundleRendererFactory() : null;
 
+if (!config.env.env) {
+
+  app.use(express.Router().get(['*'], (req, res, next) => {
+    if (req.protocol === 'https') {
+      res.redirect(`http://${req.hostname}${req.url}`);
+    } else {
+      next();
+    }
+  }));
+
+}
+
 // html请求
 app.use(express.Router().get(['/*.html', '/'], (req, res, next) => {
 

@@ -120,6 +120,17 @@ app.use(function (err, req, res, next) {
 // 预先创建渲染器
 var bundleRenderer = _config2.default.env.env ? bundleRendererFactory() : null;
 
+if (!_config2.default.env.env) {
+
+  app.use(_express2.default.Router().get(['*'], function (req, res, next) {
+    if (req.protocol === 'https') {
+      res.redirect('http://' + req.hostname + req.url);
+    } else {
+      next();
+    }
+  }));
+}
+
 // html请求
 app.use(_express2.default.Router().get(['/*.html', '/'], function (req, res, next) {
 

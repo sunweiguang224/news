@@ -148,25 +148,17 @@ export default {
         url.host = req.hostname;
       }*/
 
-      // url.protocol = 'http';
-      // url.host = `${runtime.isServer() ? req.hostname : location.hostname}:8100`;
-      //
-      // // 转化成最终请求url
-      // options.url = url.toString();
+      url.protocol = 'http';
+      url.host = req.hostname;
+
+      // 转化成最终请求url
+      options.url = url.toString();
 
       // 环境号
       if ('[[num]]') {
         options.headers.rootflag = '[[num]]';
       }
     }
-
-    let url = urlParse(options.url);
-    // 协议后面的//
-    url.slashes = true;
-    url.protocol = 'http';
-    // url.protocol = req.protocol;
-
-    url.host = `${runtime.isServer() ? req.hostname : location.hostname}`;
 
     // // 测试微信分享文案使用
     // if(options.url.indexOf('/api/') !== -1){
@@ -175,11 +167,6 @@ export default {
     // if(options.url.indexOf('/wechatJsToken') !== -1){
     //   url.host = `18686604386.davdian.com:6001`;
     // }
-
-    // 转化成最终请求url
-    options.url = url.toString();
-
-    console.log(options.url);
 
     // 防止出错时查不到请求参数
     // console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
