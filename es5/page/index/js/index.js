@@ -80,8 +80,6 @@ exports.default = {
       // 页面内部状态
       categoryBarSwiper: null,
       newsListSwiper: null,
-
-      // 样式
       style: {
         titleBarHeight: 40,
         categoryBarHeight: 36
@@ -127,6 +125,12 @@ exports.default = {
         }
       }
     });
+
+    // 预加载的js
+    setTimeout(function () {
+      // 详情页
+      import( /* webpackChunkName: "page/detail/js/detail" */'../../detail/detail.vue');
+    }, 1000);
   },
 
 

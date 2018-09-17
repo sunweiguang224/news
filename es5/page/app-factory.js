@@ -29,9 +29,11 @@ exports.default = {
         req = _ref.req,
         res = _ref.res;
 
+    var newStore = _store2.default.create({ req: req, res: res });
+    var newRouter = _router2.default.create({ req: req, res: res, store: newStore });
     return new _vue2.default({
-      router: _router2.default.create({ req: req, res: res }),
-      store: _store2.default.create({ req: req, res: res }),
+      store: newStore,
+      router: newRouter,
       render: function render(createElement) {
         return createElement(
         // app应用容器

@@ -1,5 +1,5 @@
 <template>
-  <transition name="detail">
+  <transition :name="$store.state.detail.transitionName">
     <div class="detail"
          :style="{'padding-top': numToRem($store.state.global.statusBarHeight)}">
 

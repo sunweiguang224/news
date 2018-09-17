@@ -28,6 +28,7 @@ exports.default = {
   namespaced: true,
   state: function state() {
     return {
+      transitionName: 'old',
       categoryList: ['推荐', '娱乐', '生活', '体育', '军事', '科技', '互联网', '国际', '国内', '人文', '汽车', '财经', '房产', '时尚'],
       newsList: {
         '推荐': {
@@ -120,6 +121,9 @@ exports.default = {
   },
 
   mutations: {
+    setTransitionName: function setTransitionName(state, data) {
+      state.transitionName = data;
+    },
     setCategory: function setCategory(state, data) {
       state.category = data;
     },

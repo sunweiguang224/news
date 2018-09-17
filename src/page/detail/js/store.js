@@ -6,10 +6,14 @@ export default {
   namespaced: true,
   state () {
     return {
+      transitionName: 'old',
       news: null,
     };
   },
   mutations: {
+    setTransitionName (state, data) {
+      state.transitionName = data;
+    },
     setNews (state, data) {
       state.news = data;
     },

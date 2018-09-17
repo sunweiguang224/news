@@ -7,7 +7,7 @@ Vue.use(Router);
 Vue.use(lazyload);
 
 export default {
-  create ({req, res}) {
+  create ({req, res, store}) {
     const router = new Router({
       mode: 'history',
       routes: [
@@ -18,8 +18,8 @@ export default {
           meta: {
             title: '天天想看',
           },
-          // component: () => import(/* webpackChunkName: "page/index/js/index" */'./index/index.vue'),
-          component: require('./index/index.vue').default,
+          component: () => import(/* webpackChunkName: "page/index/js/index" */'./index/index.vue'),
+          // component: require('./index/index.vue').default,
           beforeEnter (to, from, next) {
             next();
           },
@@ -28,8 +28,8 @@ export default {
           name: 'detail',
           path: '/detail.html',
           meta: {},
-          // component: () => import(/* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue'),
-          component: require('./detail/detail.vue').default,
+          component: () => import(/* webpackChunkName: "page/detail/js/detail" */'./detail/detail.vue'),
+          // component: require('./detail/detail.vue').default,
           beforeEnter (to, from, next) {
             next();
           },
@@ -39,6 +39,29 @@ export default {
 
     // 全局前置钩子
     router.beforeEach((to, from, next) => {
+      if (runtime.isClient()) {
+
+        // 首次进入
+        if (!from.name) {
+          store.commit(`${to.name}/setTransitionName`, `old`);
+
+          // 路由之间切换
+        } else {
+
+          debugger
+          // 返回
+          if (to.path === router.history.list[router.history.list.length - 1]) {
+            store.commit(`${from.name}/setTransitionName`, `new`);
+            store.commit(`${to.name}/setTransitionName`, `old`);
+
+            // 前进
+          } else {
+            store.commit(`${from.name}/setTransitionName`, `old`);
+            store.commit(`${to.name}/setTransitionName`, `new`);
+          }
+        }
+
+      }
       next();
     });
 
@@ -57,6 +80,53 @@ export default {
         // window.scrollTo(startPos, startPos);
       }
     });
+
+    if (runtime.isClient()) {
+
+      // 用来记录历史位置
+      router.history.list = [];
+
+      // 每次使用编程式导航跳转新页面时，记录新的url
+      let routerPush = router.push;
+      router.push = (location, onComplete, onAbort) => {
+
+        // 跳转之前添加历史记录
+        router.history.list.push(router.history.current.path);
+        debugger
+
+        routerPush.call(router, location, () => {
+          if (onComplete) {
+            onComplete();
+          }
+        }, () => {
+          debugger
+          if (onAbort) {
+            onAbort();
+
+            // 跳转失败了删除刚刚添加的历史记录
+            router.history.list.pop();
+          }
+        });
+      };
+
+      // 每次后退时，删除历史记录中最后一条
+      window.addEventListener('popstate', () => {
+        // 后退
+        if (router.history.list.length > 0) {
+          debugger
+          router.history.list.pop();
+        } else {
+
+          // 前进
+          debugger
+          router.history.list.push(router.history.current.path);
+        }
+
+
+        debugger
+      });
+
+    }
 
     return router;
   },

@@ -28,11 +28,15 @@ exports.default = {
   namespaced: true,
   state: function state() {
     return {
+      transitionName: 'old',
       news: null
     };
   },
 
   mutations: {
+    setTransitionName: function setTransitionName(state, data) {
+      state.transitionName = data;
+    },
     setNews: function setNews(state, data) {
       state.news = data;
     }
