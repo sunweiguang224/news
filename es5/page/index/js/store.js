@@ -25,10 +25,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 exports.default = {
-  namespaced: true,
   state: function state() {
     return {
-      transitionName: 'old',
       categoryList: ['推荐', '娱乐', '生活', '体育', '军事', '科技', '互联网', '国际', '国内', '人文', '汽车', '财经', '房产', '时尚'],
       newsList: {
         '推荐': {
@@ -121,9 +119,6 @@ exports.default = {
   },
 
   mutations: {
-    setTransitionName: function setTransitionName(state, data) {
-      state.transitionName = data;
-    },
     setCategory: function setCategory(state, data) {
       state.category = data;
     },

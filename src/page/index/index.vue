@@ -1,5 +1,5 @@
 <template>
-  <transition :name="$store.state.index.transitionName">
+  <transition :name="$store.state.index.pageSwitchClassPrefix">
     <div class="index"
       :style="{'padding-top': numToRem($store.state.global.statusBarHeight + style.titleBarHeight + style.categoryBarHeight)}">
 

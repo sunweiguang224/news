@@ -1,0 +1,48 @@
+
+.app > .page {
+
+  /* 新页面显示动画 */
+  @keyframes page-switch-new-enter-animation {
+    0% {
+      transform: translateX(100%);
+    }
+  }
+
+  &.new-enter-active {
+    animation: page-switch-new-enter-animation 0.5s;
+  }
+
+  /* 新页面离开动画 */
+  @keyframes page-switch-new-leave-animation {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  &.new-leave-active {
+    animation: page-switch-new-leave-animation 0.5s;
+  }
+
+  /* 历史页面显示动画 */
+  @keyframes page-switch-history-enter-animation {
+    0% {
+      transform: translateX(-100%);
+    }
+  }
+
+  &.history-enter-active {
+    animation: page-switch-history-enter-animation 0.5s;
+  }
+
+  /* 历史页面离开动画 */
+  @keyframes page-switch-history-leave-animation {
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  &.history-leave-active {
+    animation: page-switch-history-leave-animation 0.5s;
+  }
+
+}

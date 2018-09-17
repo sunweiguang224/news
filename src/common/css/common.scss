@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 @import '../../../node_modules/normalize.css/normalize';
+@import 'page-switch-animation';
 
 * {
   margin: 0;
@@ -84,49 +85,4 @@ body {
     height: 100%;
     overflow: auto;
   }
-}
-
-
-
-/* 页面显示|离开动画 */
-@keyframes new-enter-animation{
-  0% {
-    transform: translateX(100%);
-  }
-}
-
-@keyframes new-leave-animation{
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.new-enter-active {
-  animation: new-enter-animation 0.5s;
-}
-
-.new-leave-active {
-  animation: new-leave-animation 0.5s;
-}
-
-
-/* 页面显示|离开动画 */
-@keyframes old-enter-animation {
-  0% {
-    transform: translateX(-100%);
-  }
-}
-
-@keyframes old-leave-animation {
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-.old-enter-active {
-  animation: old-enter-animation 0.5s;
-}
-
-.old-leave-active {
-  animation: old-leave-animation 0.5s;
 }

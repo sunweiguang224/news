@@ -4,12 +4,55 @@ import ua from 'ua';
 
 Vue.use(Vuex);
 
+/**
+ * 基础设置
+ * @param setting
+ * @return {*}
+ */
+function createCommonSetting(setting) {
+
+  // setting属性覆盖
+  setting = Object.assign({
+
+    // 页面切换动画
+    namespaced: true,
+
+  }, setting);
+
+
+  // setting.state属性覆盖
+  let originalState = setting.state;
+  setting.state = function () {
+    return Object.assign({
+
+      // 页面切换动画
+      pageSwitchClassPrefix: 'history',
+
+    }, originalState());
+  };
+
+
+  // setting.state属性覆盖
+  setting.mutations = Object.assign({
+
+    // 页面切换动画
+    setPageSwitchClassPrefix (state, data) {
+      state.pageSwitchClassPrefix = data;
+    },
+
+  }, setting.mutations);
+
+  debugger
+
+  return setting;
+}
+
 export default {
   create ({req, res}) {
     return new Vuex.Store({
       modules: {
-        index: require('./index/js/store.js').default,
-        detail: require('./detail/js/store.js').default,
+        index: createCommonSetting(require('./index/js/store.js').default),
+        detail: createCommonSetting(require('./detail/js/store.js').default),
         global: {
           namespaced: true,
           state () {

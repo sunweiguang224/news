@@ -67,7 +67,7 @@ exports.default = {
 
         // 首次进入
         if (!from.name) {
-          store.commit(to.name + '/setTransitionName', 'old');
+          store.commit(to.name + '/setPageSwitchClassPrefix', 'history');
 
           // 路由之间切换
         } else {
@@ -75,13 +75,13 @@ exports.default = {
             debugger;
             // 返回
             if (to.path === router.history.list[router.history.list.length - 1]) {
-              store.commit(from.name + '/setTransitionName', 'new');
-              store.commit(to.name + '/setTransitionName', 'old');
+              store.commit(from.name + '/setPageSwitchClassPrefix', 'new');
+              store.commit(to.name + '/setPageSwitchClassPrefix', 'history');
 
               // 前进
             } else {
-              store.commit(from.name + '/setTransitionName', 'old');
-              store.commit(to.name + '/setTransitionName', 'new');
+              store.commit(from.name + '/setPageSwitchClassPrefix', 'history');
+              store.commit(to.name + '/setPageSwitchClassPrefix', 'new');
             }
           }
       }

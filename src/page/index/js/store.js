@@ -3,10 +3,8 @@ import runtime from 'runtime';
 import Vue from 'vue';
 
 export default {
-  namespaced: true,
   state () {
     return {
-      transitionName: 'old',
       categoryList: [
         '推荐',
         '娱乐',
@@ -113,9 +111,6 @@ export default {
     };
   },
   mutations: {
-    setTransitionName (state, data) {
-      state.transitionName = data;
-    },
     setCategory (state, data) {
       state.category = data;
     },
@@ -180,3 +175,5 @@ export default {
     },
   },
 };
+
+

@@ -4,6 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
@@ -20,6 +22,46 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _vue2.default.use(_vuex2.default);
 
+/**
+ * 基础设置
+ * @param setting
+ * @return {*}
+ */
+function createCommonSetting(setting) {
+
+  // setting属性覆盖
+  setting = _extends({
+
+    // 页面切换动画
+    namespaced: true
+
+  }, setting);
+
+  // setting.state属性覆盖
+  var originalState = setting.state;
+  setting.state = function () {
+    return _extends({
+
+      // 页面切换动画
+      pageSwitchClassPrefix: 'history'
+
+    }, originalState());
+  };
+
+  // setting.state属性覆盖
+  setting.mutations = _extends({
+
+    // 页面切换动画
+    setPageSwitchClassPrefix: function setPageSwitchClassPrefix(state, data) {
+      state.pageSwitchClassPrefix = data;
+    }
+  }, setting.mutations);
+
+  debugger;
+
+  return setting;
+}
+
 exports.default = {
   create: function create(_ref) {
     var req = _ref.req,
@@ -27,8 +69,8 @@ exports.default = {
 
     return new _vuex2.default.Store({
       modules: {
-        index: require('./index/js/store.js').default,
-        detail: require('./detail/js/store.js').default,
+        index: createCommonSetting(require('./index/js/store.js').default),
+        detail: createCommonSetting(require('./detail/js/store.js').default),
         global: {
           namespaced: true,
           state: function state() {
