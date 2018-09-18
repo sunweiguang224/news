@@ -77,7 +77,7 @@ export default {
     // 预加载的js
     setTimeout(() => {
       // 详情页
-      import(/* webpackChunkName: "page/detail/js/detail" */'../../detail/detail.vue');
+      import(/* webpackChunkName: "static/page/detail/js/detail" */'../../detail/detail.vue');
     }, 1000);
   },
 
