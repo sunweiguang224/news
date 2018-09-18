@@ -57,8 +57,6 @@ function createCommonSetting(setting) {
     }
   }, setting.mutations);
 
-  debugger;
-
   return setting;
 }
 

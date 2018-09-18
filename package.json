@@ -20,7 +20,7 @@
     "server": "webpack --config es5/build/webpack.server.config.js --progress --color",
     "client": "npm run dll; webpack --config es5/build/webpack.client.config.js --progress --color",
     "start": "webpack --config es5/build/webpack.server.config.js; webpack --config es5/build/webpack.client.config.js",
-    "service": "node ./es5/build/server.js"
+    "service": "node --inspect ./es5/build/server.js"
   },
   "author": "fe",
   "license": "ISC",
