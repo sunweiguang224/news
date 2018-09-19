@@ -49,8 +49,8 @@ export default {
   create ({req, res}) {
     return new Vuex.Store({
       modules: {
-        index: createCommonSetting(require('./index/js/store.js').default),
-        detail: createCommonSetting(require('./detail/js/store.js').default),
+        index: createCommonSetting(require('../../../page/index/js/store.js').default),
+        detail: createCommonSetting(require('../../../page/detail/js/store.js').default),
         global: {
           namespaced: true,
           state () {

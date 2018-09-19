@@ -18,7 +18,7 @@ export default {
           meta: {
             title: '天天想看',
           },
-          component: () => import(/* webpackChunkName: "static/page/index/js/index" */'./index/index.vue'),
+          component: () => import(/* webpackChunkName: "static/page/index/js/index" */'../../../page/index/index.vue'),
           beforeEnter (to, from, next) {
             next();
           },
@@ -27,7 +27,7 @@ export default {
           name: 'detail',
           path: '/detail.html',
           meta: {},
-          component: () => import(/* webpackChunkName: "static/page/detail/js/detail" */'./detail/detail.vue'),
+          component: () => import(/* webpackChunkName: "static/page/detail/js/detail" */'../../../page/detail/detail.vue'),
           beforeEnter (to, from, next) {
             next();
           },

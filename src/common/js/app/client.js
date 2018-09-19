@@ -1,4 +1,4 @@
-import factory from './app-factory.js';
+import factory from './factory.js';
 
 // 创建vue实例
 let app = factory.create();

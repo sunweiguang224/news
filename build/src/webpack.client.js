@@ -14,7 +14,7 @@ util.copyFile(`${config.path.base}/vendor/vendor.min.js`, 'dist/static/common/js
 
 let json = merge(require('./webpack.base').default, {
   entry: {
-    'static/page/app-client': `${config.path.project}/src/page/app-client.js`,
+    'static/common/js/app/client': `${config.path.project}/src/common/js/app/client.js`,
   },
 
   output: {

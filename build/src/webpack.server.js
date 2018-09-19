@@ -8,7 +8,7 @@ import config from './config.js';
 
 let setting = {
   // 将 entry 指向应用程序的 server entry 文件
-  entry: `${config.path.project}/src/page/app-server.js`,
+  entry: `${config.path.project}/src/common/js/app/server.js`,
 
   // 这允许 webpack 以 Node 适用方式(Node-appropriate fashion)处理动态导入(dynamic import)，
   // 并且还会在编译 Vue 组件时，

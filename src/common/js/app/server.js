@@ -1,4 +1,4 @@
-import factory from './app-factory.js';
+import factory from './factory.js';
 import clientMocker from './client-mocker.js';
 // import console from 'dvd-service-js-console';
 

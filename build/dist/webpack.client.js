@@ -40,7 +40,7 @@ _util2.default.copyFile(_config2.default.path.base + '/vendor/vendor.min.js', 'd
 
 var json = (0, _webpackMerge2.default)(require('./webpack.base').default, {
   entry: {
-    'static/page/app-client': _config2.default.path.project + '/src/page/app-client.js'
+    'static/common/js/app/client': _config2.default.path.project + '/src/common/js/app/client.js'
   },
 
   output: {
