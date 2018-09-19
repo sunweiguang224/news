@@ -21,11 +21,10 @@ export default context => new Promise((resolve, reject) => {
     // 获取匹配的页面
     let pages = app.$router.getMatchedComponents();
 
-    // console.log(pages.length);
 
     // 找不到匹配页面向上层抛出404异常
     if (!pages.length) {
-      // return reject(new Error('404'));
+      return reject(new Error('404'));
 
       // // 可以考虑增加404页面
       // app.$router.push('/404.html');

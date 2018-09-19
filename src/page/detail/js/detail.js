@@ -43,6 +43,12 @@ export default {
 
     // 设置新闻内容为标题
     route.meta.title = `天天想看：${store.state.detail.news.title}`;
+
+    // // 设置微信分享内容
+    // await weixin.init();
+    // weixin.setShareInfo({
+    //   title: '新闻详情页',
+    // });
   },
 
   beforeCreate () {
@@ -62,15 +68,6 @@ export default {
   },
 
   beforeDestroy() {
-  },
-
-  // 客户端首次进入或每次路由切换时触发
-  async enteredInClient() {
-    // await weixin.init();
-
-    // weixin.setShareInfo({
-    //   title: '新闻详情页',
-    // });
   },
 
   methods: {

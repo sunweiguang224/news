@@ -35,6 +35,12 @@ export default {
     if (store.state.index.newsList[store.state.index.category].list.length <= 0) {
       await store.dispatch('index/getNextPage', {req, res});
     }
+
+    // // 设置微信分享内容
+    // await weixin.init();
+    // weixin.setShareInfo({
+    //   title: '首页11',
+    // });
   },
 
   beforeCreate () {
@@ -88,15 +94,6 @@ export default {
   beforeDestroy() {
     this.categoryBarSwiper.destroy();
     this.newsListSwiper.destroy();
-  },
-
-  // 客户端首次进入或每次路由切换时触发
-  async enteredInClient() {
-    // await weixin.init();
-
-    // weixin.setShareInfo({
-    //   title: '首页11',
-    // });
   },
 
   methods: {
