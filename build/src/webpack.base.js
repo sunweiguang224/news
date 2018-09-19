@@ -1,9 +1,8 @@
 // 第三方
 import fs from 'fs';
 import path from 'path';
-import glob from 'glob';
-import webpack from 'webpack';
-import vuxLoader from 'vux-loader';
+// import glob from 'glob';
+// import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import StyleLintPlugin from 'stylelint-webpack-plugin';
 

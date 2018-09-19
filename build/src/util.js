@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import moment from 'moment';		// 时间格式化
-import through from 'through2';
+// import through from 'through2';
 
 export default {
   /* 获取当前格式化时间 */
@@ -25,12 +25,12 @@ export default {
     return JSON.stringify(obj, ' ', 2);
   },
   /* gulp插件，什么也不做 */
-  gulpNothing() {
-    return through.obj(function (file, enc, cb) {
-      this.push(file);
-      cb();
-    });
-  },
+  // gulpNothing() {
+  //   return through.obj(function (file, enc, cb) {
+  //     this.push(file);
+  //     cb();
+  //   });
+  // },
   /**
    * 如果没有目标路径不存在，自动创建路径所需文件夹
    * @param dest

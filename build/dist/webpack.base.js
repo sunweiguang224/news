@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", {
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; // 第三方
 
+// import glob from 'glob';
+// import webpack from 'webpack';
+
 
 // 自定义
 
@@ -17,18 +20,6 @@ var _fs2 = _interopRequireDefault(_fs);
 var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
-
-var _glob = require('glob');
-
-var _glob2 = _interopRequireDefault(_glob);
-
-var _webpack = require('webpack');
-
-var _webpack2 = _interopRequireDefault(_webpack);
-
-var _vuxLoader = require('vux-loader');
-
-var _vuxLoader2 = _interopRequireDefault(_vuxLoader);
 
 var _autoprefixer = require('autoprefixer');
 

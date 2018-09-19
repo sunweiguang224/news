@@ -16,11 +16,10 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _through = require('through2');
-
-var _through2 = _interopRequireDefault(_through);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// 时间格式化
+// import through from 'through2';
 
 exports.default = {
   /* 获取当前格式化时间 */
@@ -49,13 +48,12 @@ exports.default = {
   },
 
   /* gulp插件，什么也不做 */
-  gulpNothing: function gulpNothing() {
-    return _through2.default.obj(function (file, enc, cb) {
-      this.push(file);
-      cb();
-    });
-  },
-
+  // gulpNothing() {
+  //   return through.obj(function (file, enc, cb) {
+  //     this.push(file);
+  //     cb();
+  //   });
+  // },
   /**
    * 如果没有目标路径不存在，自动创建路径所需文件夹
    * @param dest
@@ -80,4 +78,4 @@ exports.default = {
     // 开始复制
     _fs2.default.copyFileSync(src, dest);
   }
-}; // 时间格式化
+};
