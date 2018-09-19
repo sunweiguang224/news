@@ -1,0 +1,91 @@
+@import "../../../common/css/util";
+@import "../../../common/css/common";
+//@import "../../../../node_modules/swiper/dist/css/swiper";
+
+.app > .page.detail {
+
+  /* 页面显示|离开动画 */
+  @keyframes detail-enter-animation{
+    0% {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes detail-leave-animation{
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  &.detail-enter-active {
+    animation: detail-enter-animation 0.5s;
+  }
+
+  &.detail-leave-active {
+    animation: detail-leave-animation 0.5s;
+  }
+
+  .status-bar {
+    position: fixed;
+    top: 0;
+    background: white;
+
+    @include full-width;
+  }
+
+  .contents {
+    padding: r(10) r(10) r(30);
+
+    img {
+      background: url(../../common/icon/lazyload-square.png) no-repeat center;
+      background-size: cover;
+    }
+
+    .title {
+      padding: r(10) 0;
+      font-size: r(22);
+      line-height: 1.2;
+      font-weight: bold;
+    }
+
+    .attrs {
+      padding: r(10) 0;
+      font-size: r(12);
+      color: #999;
+      display: flex;
+
+      .left {
+        flex: 1;
+
+        .attr {
+          margin-right: r(5);
+        }
+      }
+      .right {
+        width: r(50);
+      }
+    }
+
+    .text {
+      padding: r(10) 0;
+      font-size: r(17);
+      line-height: 1.5;
+    }
+
+    .image {
+      padding: r(10) 0;
+
+      img {
+        width: 100%;
+        height: r(300);
+        object-fit: cover;
+      }
+    }
+
+    .link {
+      margin-top: r(10);
+      text-align: right;
+      color: #999;
+    }
+  }
+}

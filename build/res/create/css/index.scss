@@ -1,0 +1,161 @@
+@import "../../../common/css/util";
+@import "../../../common/css/common";
+@import "../../../../node_modules/swiper/dist/css/swiper";
+
+.app > .page.index {
+  box-sizing: border-box;
+
+  /* 页面显示|离开动画 */
+  @keyframes index-enter-animation {
+    0% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes index-leave-animation {
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  &.index-enter-active {
+    animation: index-enter-animation 0.5s;
+  }
+
+  &.index-leave-active {
+    animation: index-leave-animation 0.5s;
+  }
+
+  .status-bar {
+    position: fixed;
+    top: 0;
+    background: white;
+
+    @include full-width;
+  }
+
+  .title-bar {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+
+    @include full-width;
+
+    text-align: center;
+    font-size: r(16);
+    color: $color-subject;
+  }
+
+  .category-bar {
+    position: fixed;
+    background: white;
+    z-index: 2;
+    @include full-width;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 1px;
+      transform: scaleY(0.5);
+      background: #ddd;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+    }
+
+    .swiper-wrapper {
+      .swiper-slide {
+        display: inline-block;
+        width: auto;
+        padding: 0 r(10);
+        text-align: center;
+        font-size: r(16);
+        color: #555;
+
+        &.active {
+          color: $color-subject;
+        }
+      }
+    }
+  }
+
+  .news-list-swiper {
+    background: white;
+
+    .swiper-wrapper {
+
+      .swiper-slide {
+
+        .news {
+          margin: 0 r(10);
+          padding: r(15) 0;
+
+          @include v-list-split-line;
+
+          img {
+            background: url(../../common/icon/lazyload-flat.png) no-repeat center;
+            background-size: cover;
+          }
+
+          .title {
+            font-size: r(18);
+            line-height: 1.2;
+            @include ellipsis(2);
+          }
+
+          .imgs {
+            margin-top: r(10);
+            display: flex;
+            width: 100%;
+
+            .img-container {
+              flex: 1;
+              text-align: left;
+
+              &:not(:last-of-type) {
+                margin-right: r(2);
+              }
+
+              img {
+                width: 100%;
+                height: r(78);
+              }
+            }
+          }
+
+          .attrs {
+            margin-top: r(10);
+            font-size: r(12);
+            color: #999;
+            .attr {
+              margin-right: r(5);
+            }
+          }
+
+          &.single {
+            display: flex;
+
+            .info {
+              flex: 1;
+
+              .attrs {
+                margin-top: r(20);
+              }
+            }
+
+            .img-container {
+              margin-left: r(10);
+              width: r(116);
+
+              img {
+                width: 100%;
+                height: r(74);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

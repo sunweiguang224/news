@@ -71,8 +71,9 @@ export default {
           },
           actions: {},
         },
-        index: createCommonSetting(require('../../../page/index/js/store.js').default),
-        detail: createCommonSetting(require('../../../page/detail/js/store.js').default),
+        index: createCommonSetting(require('../../../page/index/js/index.store.js').default),
+        detail: createCommonSetting(require('../../../page/detail/js/detail.store.js').default),
+        // all store above ..
       },
     });
   },
