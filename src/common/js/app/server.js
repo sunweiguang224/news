@@ -1,12 +1,8 @@
 import factory from './factory.js';
-import clientMocker from './client-mocker.js';
 // import console from 'dvd-service-js-console';
 
+// server端每次收到请求会重新初始化一个Vue实例
 export default context => new Promise((resolve, reject) => {
-  // mock client端全局变量，避免报错
-  clientMocker.mock();
-
-  // console.log(`app-server.js收到请求`, {req: context.req});
 
   // 返创建vue对象
   let app = factory.create({
@@ -19,17 +15,27 @@ export default context => new Promise((resolve, reject) => {
 
   // 等到 router 将可能的异步组件和钩子函数解析完
   app.$router.onReady(() => {
-    const Coms = app.$router.getMatchedComponents();
 
-    // 匹配不到路由404
-    if (!Coms.length) {
-      return reject(new Error('404'));
+    console.log('onReady');
+
+    // 获取匹配的页面
+    let pages = app.$router.getMatchedComponents();
+
+    // console.log(pages.length);
+
+    // 找不到匹配页面向上层抛出404异常
+    if (!pages.length) {
+      // return reject(new Error('404'));
+
+      // // 可以考虑增加404页面
+      // app.$router.push('/404.html');
+      // pages = app.$router.getMatchedComponents();
     }
 
-    // 调用所有匹配到的路由的asyncData方法保证渲染前已取到数据
-    Promise.all(Coms.map(Com => {
-      if (Com.asyncData) {
-        return Com.asyncData({
+    // 保证所有的匹配到的页面准备就绪，比如数据
+    Promise.all(pages.map(page => {
+      if (page.beforeLifeInServer) {
+        return page.beforeLifeInServer({
           req: context.req,
           res: context.res,
           store: app.$store,
@@ -41,9 +47,11 @@ export default context => new Promise((resolve, reject) => {
       context.state = app.$store.state;
       context.title = app.$router.currentRoute.meta.title;
 
+      // 返回已准备好的Vue实例
       resolve(app);
     }).catch(reject);
   }, () => {
     reject(new Error('路由onReady失败'));
   });
+
 });

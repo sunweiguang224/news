@@ -23,15 +23,6 @@ export default {
           },
         },
         [
-          // // 过度
-          // createElement(
-          //   'transition',
-          //   {
-          //     attrs: {
-          //       name: 'show',
-          //     },
-          //   },
-          //   [
           // 缓存
           createElement(
             'keep-alive',
@@ -50,8 +41,6 @@ export default {
                 }
               ),
             ],
-            //   ),
-            // ],
           ),
           // 全局弹窗容器
           createElement(

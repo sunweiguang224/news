@@ -21,8 +21,8 @@ app.$router.onReady(() => {
   // 预先调用下一个页面的asyncData方法
   app.$router.beforeResolve((to, from, next) => {
     Promise.all(app.$router.getMatchedComponents(to).map(c => {
-      if (c.asyncData) {
-        return c.asyncData({
+      if (c.beforeLifeInClient) {
+        return c.beforeLifeInClient({
           store: app.$store,
           route: to,
         });

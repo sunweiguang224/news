@@ -6,21 +6,12 @@ import ua from 'ua';
 import weixin from '../../../common/js/weixin/weixin.js';
 
 export default {
-  async asyncData ({route, store, req, res}) {
-    if (!store.state.index.newsList[store.state.index.category].list.length) {
-      await store.dispatch('index/getNextPage', {req, res});
-    }
-  },
   components: {
     'dvd-service-com-paging-list': require('../../../common/com/dvd-service-com-paging-list/dvd-service-com-paging-list.vue').default,
   },
   props: {},
   data () {
     return {
-      window,
-      document,
-      location,
-
       // 工具模块
       date,
 
@@ -35,10 +26,23 @@ export default {
   },
   computed: {},
   watch: {},
+
+  async beforeLifeInServer ({route, store, req, res}) {
+    await store.dispatch('index/getNextPage', {req, res});
+  },
+
+  async beforeLifeInClient ({route, store, req, res}) {
+    if (store.state.index.newsList[store.state.index.category].list.length <= 0) {
+      await store.dispatch('index/getNextPage', {req, res});
+    }
+  },
+
   beforeCreate () {
   },
+
   created () {
   },
+
   mounted () {
     let ts = this;
 
@@ -79,6 +83,11 @@ export default {
       // 详情页
       import(/* webpackChunkName: "static/page/detail/js/detail" */'../../detail/detail.vue');
     }, 1000);
+  },
+
+  beforeDestroy() {
+    this.categoryBarSwiper.destroy();
+    this.newsListSwiper.destroy();
   },
 
   // 客户端首次进入或每次路由切换时触发

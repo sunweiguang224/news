@@ -37,6 +37,9 @@ export default {
 
     // 全局前置钩子
     router.beforeEach((to, from, next) => {
+
+      console.log('beforeEach');
+
       if (runtime.isClient()) {
 
         // 首次进入
@@ -65,6 +68,9 @@ export default {
 
     // 全局后置钩子
     router.afterEach((to, from, next) => {
+
+      console.log('afterEach');
+
       if (runtime.isClient()) {
 
         // 设置页面title

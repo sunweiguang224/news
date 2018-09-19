@@ -4,22 +4,12 @@ import date from 'date';
 import weixin from '../../../common/js/weixin/weixin.js';
 
 export default {
-  async asyncData ({route, store, req, res}) {
-    if (route.params.news) {
-      store.commit('detail/setNews', route.params.news);
-    } else {
-      await store.dispatch('detail/getNews', {req, res, id: route.query.id});
-    }
-
-    route.meta.title = store.state.detail.news.title;
-  },
   components: {},
+
   props: {},
+
   data () {
     return {
-      window,
-      document,
-      location,
 
       // 工具模块
       date,
@@ -27,20 +17,51 @@ export default {
       // 页面内部状态
     };
   },
+
   computed: {
     // news() {
     //   return this.$route.params.news || {};
     // },
   },
+
   watch: {},
+
+  beforeRouteEnter (to, from, next) {
+    next();
+  },
+
+  async beforeLifeInServer ({route, store, req, res}) {
+    await store.dispatch('detail/getNews', {req, res, id: route.query.id});
+  },
+
+  async beforeLifeInClient ({route, store, req, res}) {
+    if (route.params.news) {
+      store.commit('detail/setNews', route.params.news);
+    } else {
+      await store.dispatch('detail/getNews', {req, res, id: route.query.id});
+    }
+
+    // 设置新闻内容为标题
+    route.meta.title = `天天想看：${store.state.detail.news.title}`;
+  },
+
   beforeCreate () {
   },
+
   created () {
   },
-  mounted () {
-    let ts = this;
 
-    // ts.$route.params.contents
+  beforeMount () {
+  },
+
+  mounted () {
+  },
+
+  beforeRouteLeave (to, from, next) {
+    next();
+  },
+
+  beforeDestroy() {
   },
 
   // 客户端首次进入或每次路由切换时触发
@@ -57,5 +78,6 @@ export default {
       return num / 100 + 'rem';
     },
   },
+
   filters: {},
 };

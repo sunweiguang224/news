@@ -1,4 +1,5 @@
 import Swiper from 'swiper';
+import runtime from 'runtime';
 
 export default {
   props: {
@@ -36,9 +37,9 @@ export default {
   data() {
     return {
       // 全局变量
-      window,
-      document,
-      location,
+      window: runtime.isClient() && window,
+      document: runtime.isClient() && document,
+      location: runtime.isClient() && location,
 
       // swiper实例
       swiper: null,
