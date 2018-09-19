@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import store from './store.js';
-import router from './router.js';
+import store from './app-store.js';
+import router from './app-router.js';
 
 /**
  * 工厂对象

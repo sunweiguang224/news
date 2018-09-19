@@ -1,4 +1,4 @@
-import factory from './factory.js';
+import factory from './app-factory.js';
 // import console from 'dvd-service-js-console';
 
 // server端每次收到请求会重新初始化一个Vue实例
