@@ -1,58 +1,60 @@
 import axios from 'axios';
-import type from 'type';
+// import type from 'type';
 import runtime from 'runtime';
 // import encrypt from 'dvd-service-js-encrypt';
 import urlParse from 'url-parse';
 import console from 'console1';
 
-// 对象转cookie格式字符串
-function objectToCookieStr(cookies) {
-  let result = '';
-
-  if (cookies) {
-    let count = 0;
-
-    // 拼接字符串
-    for (let i in cookies) {
-      result += `${i}=${cookies[i]}; `;
-      count++;
-    }
-
-    // 去掉末尾多余分隔符
-    if (count > 0) {
-      result = result.substr(0, result.length - 2);
-    }
-  }
-  return result;
-}
+// // 对象转cookie格式字符串
+// let objectToCookieStr = (cookies) => {
+//   let result = '';
+//
+//   if (cookies) {
+//     let count = 0;
+//
+//     // 拼接字符串
+//     for (let i in cookies) {
+//       result += `${i}=${cookies[i]}; `;
+//       count++;
+//     }
+//
+//     // 去掉末尾多余分隔符
+//     if (count > 0) {
+//       result = result.substr(0, result.length - 2);
+//     }
+//   }
+//   return result;
+// };
 
 // 从response headers里取指定的cookie
-function getCookieFromResponse(cookies, name) {
-  for (let i = 0; cookies && i < cookies.length; i++) {
-    let result = new RegExp(`${name}=([^;]*)`).exec(cookies[i]);
-    if (result) {
-      return result[1];
+let getCookieFromResponse = (cookies, name) => {
+    if (cookies) {
+      for (let i = 0; i < cookies.length; i++) {
+        let result = new RegExp(`${name}=([^;]*)`, 'u').exec(cookies[i]);
+        if (result) {
+          return result[1];
+        }
+      }
     }
-  }
-  return null;
-}
+    return null;
+  },
 
-/**
- * 对象 -> 表单字符串
- * @param obj
- * @return {string}
- */
-function serialize (obj) {
-  let str = '';
-  for (let i in obj) {
-    str = `${str}&${i}=${encodeURIComponent(obj[i])}`;
-  }
-  if (str.length) {
-    str = str.substr('1');
-  }
-  // console.log(str);
-  return str;
-};
+  /**
+   * 对象 -> 表单字符串
+   * @param obj
+   * @return {string}
+   */
+  serialize = obj => {
+    let str = '';
+    for (let i in obj) {
+      str = `${str}&${i}=${encodeURIComponent(obj[i])}`;
+    }
+    if (str.length) {
+      str = str.substr('1');
+    }
+    // console.log(str);
+    return str;
+  };
 
 /**
  * @module dvd-service-js-ajax
@@ -64,7 +66,7 @@ function serialize (obj) {
  * @returns {String}
  */
 export default {
-  async send(options = {}, {req, res, debug = false} = {}) {
+  async send (options = {}, {req, res, debug = false} = {}) {
     // 保留
     let oldOptions = options;
 
@@ -76,9 +78,9 @@ export default {
     // 如果是服务端，获取用户请求中的dvdsid来设置sess_key
     if (runtime.isServer()) {
       options.data = options.data || {};
-      if (req.cookies && req.cookies.dvdsid) {
-        options.data.sess_key = req.cookies.dvdsid;
-      }
+      // if (req.cookies && req.cookies.dvdsid) {
+      //   options.data.sess_key = req.cookies.dvdsid;
+      // }
     }
 
     // 数据加密（如果options.data是字符串类型则不进行加密，兼容原有的client端代码）
@@ -105,7 +107,10 @@ export default {
     // 如果是服务端
     if (runtime.isServer()) {
       // 发送请求时带上用户的headers（模拟用户的身份发送请求）
-      for (let key of ['Cookie', 'User-Agent']) {
+      for (let key of [
+        'Cookie',
+        'User-Agent',
+      ]) {
         let value = req.headers[key.toLowerCase()];
         if (value) {
           options.headers[key] = value;
@@ -118,35 +123,35 @@ export default {
       // 协议后面的//
       url.slashes = true;
 
-      /*// 如果在服务器上
-      if (runtime.isLinux()) {
-        // if (runtime.isServer()) {
+      /* // 如果在服务器上
+       if (runtime.isLinux()) {
+       // if (runtime.isServer()) {
 
-        // 内网服务只提供http协议，外网必须用http，否则会405
-        url.protocol = 'http';
+       // 内网服务只提供http协议，外网必须用http，否则会405
+       url.protocol = 'http';
 
-        // 内网域名转换，mouth
-        if (url.pathname.indexOf('/api/mg') !== -1) {
-          // url.host = req.hostname.replace(/.*\.((:?bravetime\.net)|(:?vyohui\.cn)|(:?davdian\.com))/, 'smouth1.srv.$1');
+       // 内网域名转换，mouth
+       if (url.pathname.indexOf('/api/mg') !== -1) {
+       // url.host = req.hostname.replace(/.*\.((:?bravetime\.net)|(:?vyohui\.cn)|(:?davdian\.com))/, 'smouth1.srv.$1');
 
-          // 内网域名
-          url.host = req.hostname.replace(/.*\.((:?bravetime\.net)|(:?vyohui\.cn)|(:?davdian\.com))/, `mouth${'[[env]]'.toString() == 'gray' ? '[[env]]' : ''}.priapi.$1`);
-          // 内网路径
-          url.pathname = url.pathname.replace('/api/mg/sale/', '/sale/api/');
-          url.pathname = url.pathname.replace('/api/mg/user/', '/user/api/');
+       // 内网域名
+       url.host = req.hostname.replace(/.*\.((:?bravetime\.net)|(:?vyohui\.cn)|(:?davdian\.com))/, `mouth${'[[env]]'.toString() == 'gray' ? '[[env]]' : ''}.priapi.$1`);
+       // 内网路径
+       url.pathname = url.pathname.replace('/api/mg/sale/', '/sale/api/');
+       url.pathname = url.pathname.replace('/api/mg/user/', '/user/api/');
 
-          // mobile
-        } else if (url.pathname.indexOf('/api/m') !== -1) {
-          // 内网域名
-          url.host = req.hostname.replace(/.*\.((:?bravetime\.net)|(:?vyohui\.cn)|(:?davdian\.com))/, `mobile${'[[env]]'.toString() == 'gray' ? '[[env]]' : ''}.priapi.$1`);
-          // 内网路径
-          url.pathname = url.pathname.replace(/\/api\/m\/([a-z0-9]+)\/([a-z0-9]+)?(.*)/, '/api.php?s=$1&m=$2&$3');
-        }
+       // mobile
+       } else if (url.pathname.indexOf('/api/m') !== -1) {
+       // 内网域名
+       url.host = req.hostname.replace(/.*\.((:?bravetime\.net)|(:?vyohui\.cn)|(:?davdian\.com))/, `mobile${'[[env]]'.toString() == 'gray' ? '[[env]]' : ''}.priapi.$1`);
+       // 内网路径
+       url.pathname = url.pathname.replace(/\/api\/m\/([a-z0-9]+)\/([a-z0-9]+)?(.*)/, '/api.php?s=$1&m=$2&$3');
+       }
 
-      } else {
-        url.protocol = 'https';
-        url.host = req.hostname;
-      }*/
+       } else {
+       url.protocol = 'https';
+       url.host = req.hostname;
+       } */
 
       url.protocol = 'http';
       url.host = req.hostname;
@@ -161,15 +166,15 @@ export default {
     }
 
     // // 测试微信分享文案使用
-    // if(options.url.indexOf('/api/') !== -1){
+    // if(options.url.indexOf('/api/') !== -1) {
     //   url.host = `localhost:8100`;
     // }
-    // if(options.url.indexOf('/wechatJsToken') !== -1){
+    // if(options.url.indexOf('/wechatJsToken') !== -1) {
     //   url.host = `18686604386.davdian.com:6001`;
     // }
 
     // 防止出错时查不到请求参数
-    // console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
+    console.log(`接口请求参数(${options.url})：${JSON.stringify(options, ' ', 2)}`, {req});
 
     // 设置接口超时时间30s
     options.timeout = 30000;
@@ -204,24 +209,23 @@ export default {
     // 如果是服务端
     if (runtime.isServer()) {
       // 接口返回code不为0时，自动打出error log
-     /* if (response.data && parseInt(response.data.code) !== 0) {
-        // console.log(`发现接口返回code码不为0：\n${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
-        console.log(`发现接口返回code码不为0：↓`, {req});
-      }*/
+      /* if (response.data && parseInt(response.data.code) !== 0) {
+       // console.log(`发现接口返回code码不为0：\n${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
+       console.log(`发现接口返回code码不为0：↓`, {req});
+       }*/
 
-      // if (debug || '[[env]]'.toString() !== 'prod') {
-      // console.log(`接口请求信息（${options.url}）：${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
-      // }
+      if (debug || '[[env]]'.toString() !== 'prod') {
+        console.log(`接口请求信息（${options.url}）：${JSON.stringify(simpleResponse, ' ', 2)}`, {req});
+      }
     }
 
     // 如果是服务端
     if (runtime.isServer() && res) {
-
-      function jump(forceUrl) {
+      let jump = forceUrl => {
         res.redirect(forceUrl);
         console.log(`已经跳转至强制域名 -> ${forceUrl}`, {req});
         throw new Error('interrupt');
-      }
+      };
 
       // 当店铺不存在且不存在强关系时，则302到首页
       if (response.data && parseInt(response.data.code) === 10010) {
@@ -251,5 +255,5 @@ export default {
     }
 
     return response.data;
-  }
-}
+  },
+};

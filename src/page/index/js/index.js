@@ -1,9 +1,9 @@
 import Swiper from 'swiper';
-import runtime from 'runtime';
+// import runtime from 'runtime';
 import date from 'date';
-import ua from 'ua';
+// import ua from 'ua';
 // import console from 'console';
-import weixin from '../../../common/js/weixin/weixin.js';
+// import weixin from '../../../common/js/weixin/weixin.js';
 
 export default {
   components: {
@@ -80,7 +80,7 @@ export default {
           if (!ts.$store.state.index.newsList[category].list.length) {
             ts.getNextPage();
           }
-        }
+        },
       },
     });
 
@@ -91,7 +91,7 @@ export default {
     }, 1000);
   },
 
-  beforeDestroy() {
+  beforeDestroy () {
     this.categoryBarSwiper.destroy();
     this.newsListSwiper.destroy();
   },
@@ -103,11 +103,11 @@ export default {
       });
       this.$refs.newsList[this.$store.getters['index/categoryIndex']].swiper.update();
       if (cb) {
-        cb();
+        return cb();
       }
     },
-    numToRem(num) {
-      return num / 100 + 'rem';
+    numToRem (num) {
+      return `${num / 100}rem`;
     },
   },
   filters: {},

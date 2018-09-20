@@ -30,7 +30,7 @@ var env = {
   mini: process.env.mini == 'true',
   zip: process.env.zip == 'true',
   gzip: process.env.gzip == 'true',
-  lint: process.env.lint == 'true',
+  check: process.env.check == 'true',
   repair: process.env.repair == 'true',
   ssr: _package2.default.type == 'ssr',
   page: function () {

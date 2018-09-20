@@ -1,6 +1,6 @@
 import ajax from 'ajax';
-import runtime from 'runtime';
-import Vue from 'vue';
+// import runtime from 'runtime';
+// import Vue from 'vue';
 
 export default {
   state () {
@@ -16,19 +16,10 @@ export default {
   getters: {
   },
   actions: {
-    /**
-     * 获取新闻详情
-     * @param context
-     * @param req
-     * @param res
-     * @param id
-     * @return {Promise.<void>}
-     */
     async getNews (context, {req, res, id} = {}) {
-
       let news = await ajax.send({
         type: 'get',
-        url: `/api/queryNewsDetail`,
+        url: '/api/queryNewsDetail',
         dataType: 'json',
         // data: {
         //   category: context.state.category,

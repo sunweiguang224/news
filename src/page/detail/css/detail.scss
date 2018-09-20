@@ -3,15 +3,14 @@
 //@import "../../../../node_modules/swiper/dist/css/swiper";
 
 .app > .page.detail {
-
   /* 页面显示|离开动画 */
-  @keyframes detail-enter-animation{
+  @keyframes detail-enter-animation {
     0% {
       transform: translateX(100%);
     }
   }
 
-  @keyframes detail-leave-animation{
+  @keyframes detail-leave-animation {
     100% {
       transform: translateX(100%);
     }
@@ -61,6 +60,7 @@
           margin-right: r(5);
         }
       }
+
       .right {
         width: r(50);
       }

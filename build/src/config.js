@@ -11,7 +11,7 @@ var env = {
   mini: process.env.mini == 'true',
   zip: process.env.zip == 'true',
   gzip: process.env.gzip == 'true',
-  lint: process.env.lint == 'true',
+  check: process.env.check == 'true',
   repair: process.env.repair == 'true',
   ssr: pkg.type == 'ssr',
   page: (function () {

@@ -6,35 +6,35 @@ export default {
     // 获取下一页方法
     getData: {
       type: Function,
-      default: null
+      default: null,
     },
     // 列表高度，需要显式指定
     listHeight: {
       type: String,
-      default: '100%'
+      default: '100%',
     },
     // 列表中的当前item数量
     listLength: {
       type: Number,
-      default: 0
+      default: 0,
     },
     // 是否立即加载首屏数据
     isLoadFirstPage: {
       type: Boolean,
-      default: false
+      default: false,
     },
     // 没有列表项时的提示图片
     noneImg: {
       type: String,
-      default: require('./img/none.png')
+      default: require('./img/none.png'),
     },
     // 没有列表项时的提示信息
     noneTip: {
       type: String,
-      default: '还没有红包哟~'
+      default: '还没有红包哟~',
     },
   },
-  data() {
+  data () {
     return {
       // 全局变量
       window: runtime.isClient() && window,
@@ -61,35 +61,33 @@ export default {
 
       // 停止滚动定时器
       stopScrollingTimeout: null,
-    }
+    };
   },
   computed: {
-    // 是否显示加载更多，超过一屏才显示
-//      ifShowLoadMore() {
-//        return this.listLength > 0 && this.$refs.wripper.clientHeight > this.$el.clientHeight;
-//      }
+    // // 是否显示加载更多，超过一屏才显示
+    //  ifShowLoadMore() {
+    //    return this.listLength > 0 && this.$refs.wripper.clientHeight > this.$el.clientHeight;
+    //  }
   },
-  created() {
+  created () {
   },
-  updated() {
+  updated () {
   },
-  mounted() {
-    var ts = this;
+  mounted () {
+    let ts = this;
 
     // 加载更多元素实际显示高度
-//      let loadMoreHeight = ts.$refs.load_more.clientHeight;
+    // let loadMoreHeight = ts.$refs.load_more.clientHeight;
     let loadMoreHeight = 40;
 
     // 触底加载下一页
     let ifGetData = function () {
-      console.log(1)
-
       if (ts.ajaxing || ts.isInMinInterver) {
         return;
       }
 
       // 上拉加载更多
-      if (-this.translate + loadMoreHeight > this.virtualSize - this.size) {
+      if (-ts.swiper.translate + loadMoreHeight > ts.swiper.virtualSize - ts.swiper.size) {
         setTimeout(() => {
           ts.getNextPage();
           ts.isInMinInterver = false;
@@ -97,7 +95,7 @@ export default {
         ts.isInMinInterver = true;
 
         // 下拉加载更多
-      } else if (this.translate > loadMoreHeight) {
+      } else if (ts.swiper.translate > loadMoreHeight) {
         setTimeout(() => {
           ts.getNextPage('prepend');
           ts.isInMinInterver = false;
@@ -122,19 +120,19 @@ export default {
         momentumBounce: ifGetData,
         // 触摸滑动回调函数
         sliderMove: ifGetData,
-        /*slideNextTransitionStart(){
-         debugger
-         },
-         slideNextTransitionEnd(){
-         debugger
-         },
-         slidePrevTransitionStart(){
-         debugger
-         },
-         slidePrevTransitionEnd(){
-         debugger
-         },*/
-      }
+        // slideNextTransitionStart () {
+        //   debugger
+        // },
+        // slideNextTransitionEnd () {
+        //   debugger
+        // },
+        // slidePrevTransitionStart () {
+        //   debugger
+        // },
+        // slidePrevTransitionEnd () {
+        //   debugger
+        // },
+      },
     });
 
     // 是否立即加载第一页数据
@@ -143,20 +141,20 @@ export default {
     }
   },
   // 销毁手动注册的事件和定时器等，单页面应用必须这样做，这是一个好习惯
-  beforeDestroy() {
+  beforeDestroy () {
   },
   filters: {},
   watch: {
     // 列表长度变化时重新设置swiper的slides高度
-    listLength() {
-      this.$nextTick(function () {
+    listLength () {
+      this.$nextTick(() => {
         this.swiper.updateSlides();
-      })
+      });
     },
   },
   methods: {
     // 获取下一页
-    getNextPage(type = 'append') {
+    getNextPage (type = 'append') {
       let ts = this;
       ts.isLoading = true;
       // ajax完成回调
@@ -167,12 +165,12 @@ export default {
         // 页码+1
         ts.pageNo++;
         // 是否显示加载更多，延迟一毫秒等待重绘完成
-        setTimeout(function () {
+        setTimeout(() => {
           // 有数据 && 超过一屏，才显示
           ts.ifShowLoadMore = ts.listLength > 0 && ts.$refs.wrapper.clientHeight > ts.$el.clientHeight;
-          ts.$nextTick(function () {
+          ts.$nextTick(() => {
             ts.swiper.updateSlides();
-          })
+          });
         }, 1);
       };
       ts.getData({
@@ -183,7 +181,7 @@ export default {
     /**
      * 手指按下停止滚动
      */
-    stopScrolling(event) {
+    stopScrolling (event) {
       if (this.swiper.animating) {
         this.swiper.setTranslate(this.swiper.getTranslate());
         this.swiper.animating = false;
@@ -193,4 +191,4 @@ export default {
       }
     },
   },
-}
+};

@@ -3,23 +3,23 @@
  * @author swg [源码地址](http://gitlab.rd.vyohui.com/FE-Base/dvd-base-js-type.git)
  */
 export default {
-  isNumber(value){
+  isNumber (value) {
     return Object.prototype.toString.call(value) === '[object Number]';
   },
-  isString(value){
+  isString (value) {
     return Object.prototype.toString.call(value) === '[object String]';
   },
-  isBoolean(value){
+  isBoolean (value) {
     return Object.prototype.toString.call(value) === '[object Boolean]';
   },
-  isObject(value){
+  isObject (value) {
     return Object.prototype.toString.call(value) === '[object Object]';
   },
-  isArray(value){
+  isArray (value) {
     return Object.prototype.toString.call(value) === '[object Array]';
   },
-  isFunction(value){
+  isFunction (value) {
     return Object.prototype.toString.call(value) === '[object Function]';
   },
-}
+};
 

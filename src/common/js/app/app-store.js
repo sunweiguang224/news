@@ -10,17 +10,16 @@ Vue.use(Vuex);
  * @param setting
  * @return {*}
  */
-function createCommonSetting(setting) {
-
+let createCommonSetting = setting => {
   // 强制每个store使用命名空间
   setting.namespaced = true;
 
   // setting.state属性覆盖
-  let state = setting.state();
+  let pageState = setting.state();
   setting.state = () => Object.assign({
     // 每个store初始默认切换动画前缀
     pageSwitchClassPrefix: 'history',
-  }, state);
+  }, pageState);
 
   // setting.state属性覆盖
   setting.mutations = Object.assign({
@@ -31,7 +30,7 @@ function createCommonSetting(setting) {
   }, setting.mutations);
 
   return setting;
-}
+};
 
 export default {
   create ({req, res}) {
@@ -43,7 +42,7 @@ export default {
             let state = {
               statusBarHeight: (function () {
                 let statusBarHeight = ua.getStatusBarHeight(req && req.headers && req.headers['user-agent']);
-                statusBarHeight = statusBarHeight && Number(statusBarHeight) != NaN ? Number(statusBarHeight) : 0;
+                statusBarHeight = statusBarHeight && !isNaN(Number(statusBarHeight)) ? Number(statusBarHeight) : 0;
                 return statusBarHeight;
               })(),
             };
@@ -54,7 +53,7 @@ export default {
                 window,
                 document: window.document,
                 location: window.location,
-              }
+              };
             }
 
             return state;
@@ -65,9 +64,9 @@ export default {
             },
           },
           getters: {
-            /*categoryIndex (state) {
+            /* categoryIndex (state) {
              return 0;
-             }*/
+             } */
           },
           actions: {},
         },

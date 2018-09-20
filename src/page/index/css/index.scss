@@ -50,9 +50,10 @@
     position: fixed;
     background: white;
     z-index: 2;
+
     @include full-width;
 
-    &:after {
+    &::after {
       content: '';
       display: block;
       height: 1px;
@@ -84,9 +85,7 @@
     background: white;
 
     .swiper-wrapper {
-
       .swiper-slide {
-
         .news {
           margin: 0 r(10);
           padding: r(15) 0;
@@ -101,6 +100,7 @@
           .title {
             font-size: r(18);
             line-height: 1.2;
+
             @include ellipsis(2);
           }
 
@@ -128,6 +128,7 @@
             margin-top: r(10);
             font-size: r(12);
             color: #999;
+
             .attr {
               margin-right: r(5);
             }

@@ -14,7 +14,7 @@
 
       <!--分类栏-->
       <div class="category-bar swiper-container" ref="categoryBar"
-           :style="{'top': numToRem($store.state.global.statusBarHeight + style.titleBarHeight)}">
+        :style="{'top': numToRem($store.state.global.statusBarHeight + style.titleBarHeight)}">
         <div class="swiper-wrapper">
           <span class="swiper-slide" v-for="(item, i) in $store.state.index.categoryList"
                 :class="{active: $store.state.index.category === item}"
@@ -31,9 +31,8 @@
         <div class="swiper-wrapper">
           <span class="swiper-slide" v-for="(category, i) in $store.state.index.categoryList">
             <dvd-service-com-paging-list class="news-list" ref="newsList"
-             :get-data="getNextPage"
-             :list-length="$store.state.index.newsList[category].list.length"
-            >
+              :get-data="getNextPage"
+              :list-length="$store.state.index.newsList[category].list.length">
               <div slot="list">
                 <!--模板-->
                 <template v-for="(item, i) in $store.state.index.newsList[category].list">
@@ -94,7 +93,7 @@
 </template>
 
 <style lang="sass" lang="scss" rel="stylesheet/scss">
-  @import "css/index";
+  @import "./css/index";
 </style>
 
 <script>

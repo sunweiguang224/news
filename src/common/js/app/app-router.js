@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import lazyload from 'vue-lazyload';
-import runtime from 'runtime';
+// import runtime from 'runtime';
 
 Vue.use(Router);
 Vue.use(lazyload);

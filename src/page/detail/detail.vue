@@ -1,7 +1,7 @@
 <template>
   <transition :name="$store.state.detail.pageSwitchClassPrefix">
     <div class="detail"
-         :style="{'padding-top': numToRem($store.state.global.statusBarHeight)}">
+      :style="{'padding-top': numToRem($store.state.global.statusBarHeight)}">
 
       <!--app状态栏-->
       <div class="status-bar" :style="{height: numToRem($store.state.global.statusBarHeight)}"></div>

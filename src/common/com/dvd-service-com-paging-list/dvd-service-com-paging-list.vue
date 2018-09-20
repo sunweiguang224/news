@@ -2,7 +2,8 @@
 <template>
   <!--垂直滑动-->
   <div class="swiper-container dvd-service-com-paging-list" :style="{height: listHeight}"
-       @click.capture="stopScrolling">
+    @click.capture="stopScrolling">
+
     <div class="swiper-wrapper" ref="wrapper">
 
       <!--下拉加载更多-->

@@ -187,7 +187,7 @@
   }
 }
 
-@mixin full-width(){
+@mixin full-width() {
   width: 100%;
   max-width: $pageMaxWidth;
 }

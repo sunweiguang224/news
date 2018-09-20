@@ -101,6 +101,16 @@
       "error",
       "ts"
     ],
+    // 匿名函数包裹方式：内部
+    "wrap-iife": [
+      "error",
+      "inside"
+    ],
+    // 数组元素是否需要换行：如果有一个换行，其他也需要换行
+    "array-element-newline": [
+      "error",
+      "consistent"
+    ],
     /********************************** 关闭 **********************************/
     // require关键字是否必须置顶：不需要
     "global-require": [
@@ -200,6 +210,66 @@
     ],
     // 每个代码文件最大长度：不限制
     "max-lines": [
+      "off"
+    ],
+    // 函数内部代码最大行数：不限制
+    "max-lines-per-function": [
+      "off"
+    ],
+    // 最要使用解构复制：不强制
+    "prefer-destructuring": [
+      "off"
+    ],
+    // 方法是否必须有文档注释：不强制
+    "require-jsdoc": [
+      "off"
+    ],
+    // 文档注释有效性校验：关闭
+    "valid-jsdoc": [
+      "off"
+    ],
+    // 正则表达式强制使用u模式：关闭
+    "require-unicode-regexp": [
+      "off"
+    ],
+    // 限制变量生命最大数量：关闭
+    "max-statements": [
+      "off"
+    ],
+    // for-in是否需要if来排除prototype中的属性：不需要
+    "guard-for-in": [
+      "off"
+    ],
+    // 是否禁止过多的if：不禁止
+    "complexity": [
+      "off"
+    ],
+    // 是否禁止多函数参数重新复制：不禁止
+    "no-param-reassign": [
+      "off"
+    ],
+    // 是否建议使用对象传布：不建议
+    "prefer-object-spread": [
+      "off"
+    ],
+    // 是否禁止不变化的条件表打死：不禁止
+    "no-constant-condition": [
+      "off"
+    ],
+    // 变量生命是否需要连写：不需要
+    "one-var": [
+      "off"
+    ],
+    // parseInt是否必须传第二个基数参数：不需要
+    "radix": [
+      "off"
+    ],
+    // 正则表达式是否需要被括号包裹：不需要
+    "wrap-regex": [
+      "off"
+    ],
+    // 检查大括号内每个元素间距：不需要
+    "object-curly-spacing": [
       "off"
     ],
     // 对象属性定义是否需要按对象属性名来升序或降序排列：不需要

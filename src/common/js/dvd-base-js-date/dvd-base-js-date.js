@@ -1,4 +1,5 @@
 import number from '../dvd-base-js-number/dvd-base-js-number';
+import type from '../dvd-base-js-type/dvd-base-js-type';
 
 /**
  * @module dvd-base-js-date
@@ -12,24 +13,33 @@ export default {
    * @returns {String}
    * Demo: date.format(new Date(), 'yyyy-MM-dd HH:mm:ss SSS');
    */
-  format(date, format) {
-    date = Object.prototype.toString.call(date) == '[object String]' ? new Date(parseInt(date)) :
-      Object.prototype.toString.call(date) == '[object Number]' ? new Date(date) :
-        date || new Date();
-    format = Object.prototype.toString.call(format) == '[object String]' ? format : 'yyyy-MM-dd hh:mm:ss SSS';
-    var map = {
-      'y': date.getFullYear(),
-      'M': date.getMonth() + 1,
-      'd': date.getDate(),
-      'h': date.getHours(),
-      'm': date.getMinutes(),
-      's': date.getSeconds(),
-      'S': date.getMilliseconds()
+  format (date, format) {
+    if (!(date instanceof Date)) {
+      if (type.isString(date)) {
+        date = new Date(parseInt(date));
+      } else if (type.isNumber(date)) {
+        date = new Date(date);
+      } else {
+        date = new Date();
+      }
+    }
+
+    if (!type.isString(format)) {
+      format = 'yyyy-MM-dd hh:mm:ss SSS';
+    }
+
+    let map = {
+      y: date.getFullYear(),
+      M: date.getMonth() + 1,
+      d: date.getDate(),
+      h: date.getHours(),
+      m: date.getMinutes(),
+      s: date.getSeconds(),
+      S: date.getMilliseconds(),
     };
-    for (var key in map) {
-      format = format.replace(new RegExp(key + '+'), function (matchValue, index, input) {
-        return number.preZero(map[key], matchValue.length);
-      });
+
+    for (let key in map) {
+      format = format.replace(new RegExp(`${key}+`), (matchValue, index, input) => number.preZero(map[key], matchValue.length));
     }
     return format;
   },
@@ -38,14 +48,14 @@ export default {
    * @param year 年（默认取当前年）
    * @param month 月份1-12（默认取当前月）
    */
-  getDayCount(year, month) {
+  getDayCount (year, month) {
     year = year || new Date().getFullYear();
     month = month || new Date().getMonth() + 1;
 
     let days = null;
-    if (month == 4 || month == 6 || month == 9 || month == 11) {
+    if (month === 4 || month === 6 || month === 9 || month === 11) {
       days = 30;
-    } else if (month == 2) {
+    } else if (month === 2) {
       days = 28;
       // 闰年
       if (year % 4 === 0) {
@@ -68,7 +78,7 @@ export default {
    * @param param.digit {Number} 位数，用于格式化，如果19:1格式化成19:01
    * @returns {{second: Number, minute: Number, hour: Number, day: Number}}
    */
-  getTimeDuration(param = {}) {
+  getTimeDuration (param = {}) {
     // 默认值
     param.second = param.second || 0;
     param.minute = param.minute || 0;
@@ -104,7 +114,7 @@ export default {
       minute: param.digit ? number.preZero(result.minute, param.digit) : result.minute,
       hour: param.digit ? number.preZero(result.hour, param.digit) : result.hour,
       day: param.digit ? number.preZero(result.day, param.digit) : result.day,
-    }
+    };
   },
-}
+};
 

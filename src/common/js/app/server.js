@@ -3,7 +3,6 @@ import factory from './app-factory.js';
 
 // server端每次收到请求会重新初始化一个Vue实例
 export default context => new Promise((resolve, reject) => {
-
   // 返创建vue对象
   let app = factory.create({
     req: context.req,
@@ -15,7 +14,6 @@ export default context => new Promise((resolve, reject) => {
 
   // 等到 router 将可能的异步组件和钩子函数解析完
   app.$router.onReady(() => {
-
     console.log('onReady');
 
     // 获取匹配的页面
@@ -52,5 +50,4 @@ export default context => new Promise((resolve, reject) => {
   }, () => {
     reject(new Error('路由onReady失败'));
   });
-
 });

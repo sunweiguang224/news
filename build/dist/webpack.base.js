@@ -158,7 +158,7 @@ function createEslintLoader() {
 }
 
 /* 是否需要代码风格检测 */
-if (_config2.default.env.lint) {
+if (_config2.default.env.check) {
   // js代码格式校验
   json.module.rules[0].use.push(createEslintLoader());
 
