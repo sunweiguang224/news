@@ -292,4 +292,11 @@ export default {
     let result = /StatusBarHeight\/([^ ]+)/.exec(ua || this.ua);
     return result ? result[1] : '';
   },
+
+  /**
+   * 获取大V店app设备号
+   */
+  isNewsApp (ua) {
+    return (ua || this.ua).indexOf('app/news') !== -1;
+  },
 };

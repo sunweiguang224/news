@@ -135,7 +135,8 @@ var json = {
       'number': _path2.default.resolve('src/common/js/dvd-base-js-number/dvd-base-js-number.js'),
       'type': _path2.default.resolve('src/common/js/dvd-base-js-type/dvd-base-js-type.js'),
       'console1': _path2.default.resolve('src/common/js/dvd-service-js-console/dvd-service-js-console.js'),
-      'ua': _path2.default.resolve('src/common/js/dvd-base-js-ua/dvd-base-js-ua.js')
+      'ua': _path2.default.resolve('src/common/js/dvd-base-js-ua/dvd-base-js-ua.js'),
+      'native': _path2.default.resolve('src/common/js/native/native.js')
     }
   }
 };

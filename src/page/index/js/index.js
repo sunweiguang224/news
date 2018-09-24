@@ -1,5 +1,8 @@
 import common from '../../../common/js/common/common.js';
 import Swiper from 'swiper';
+import type from 'type';
+import native from 'native';
+import ua from 'ua';
 
 export default {
   components: {
@@ -43,6 +46,12 @@ export default {
 
   mounted () {
     let ts = this;
+
+    // if (ua.isNewsApp()) {
+    //   alert(JSON.stringify(native.test({
+    //     msg: "威风威风",
+    //   })));
+    // }
 
     // alert(this.$store.state.global.statusBarHeight);
 

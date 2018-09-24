@@ -132,6 +132,7 @@ let json = {
       'type': path.resolve('src/common/js/dvd-base-js-type/dvd-base-js-type.js'),
       'console1': path.resolve('src/common/js/dvd-service-js-console/dvd-service-js-console.js'),
       'ua': path.resolve('src/common/js/dvd-base-js-ua/dvd-base-js-ua.js'),
+      'native': path.resolve('src/common/js/native/native.js'),
     }
   },
 };
