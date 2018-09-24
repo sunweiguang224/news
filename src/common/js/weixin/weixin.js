@@ -20,17 +20,19 @@ export default {
 
   // 加载 weixin-js-sdk.js
   async loadSdk () {
-    return new Promise((resolve, reject) => {
+    let promise = await new Promise((resolve, reject) => {
       scriptjs('//res.wx.qq.com/open/js/jweixin-1.4.0.js', () => {
         this.wx = window.wx;
         resolve();
       }, reject);
     });
+
+    return promise;
   },
 
   // 获取签名
   async getToken () {
-    return new Promise((resolve, reject) => {
+    let promise = await new Promise((resolve, reject) => {
       ajax.send({
         type: 'get',
         url: `/wechatJsToken?url=${encodeURIComponent(encodeURIComponent(location.href))}&_=${Date.now()}`,
@@ -39,12 +41,13 @@ export default {
         resolve(res.data);
       }, reject);
     });
+
+    return promise;
   },
 
   // 验证签名，获取接口权限
   async checkToken (token) {
-    return new Promise((resolve, reject) => {
-
+    let promise = await new Promise((resolve, reject) => {
       // 验证成功回调
       this.wx.ready(() => {
         this.nextCanGetTokenTime = null;
@@ -113,6 +116,8 @@ export default {
         ],
       });
     });
+
+    return promise;
   },
 
   // 设置分享信息

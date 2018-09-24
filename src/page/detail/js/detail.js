@@ -1,19 +1,17 @@
-// import Swiper from 'swiper';
-// import runtime from 'runtime';
-import date from 'date';
-// import weixin from '../../../common/js/weixin/weixin.js';
+import common from '../../../common/js/common/common.js';
 
 export default {
   components: {},
   props: {},
   data () {
-    return {
-
-      // 工具模块
-      date,
-
-      // 页面内部状态
-    };
+    return common.mergeState({
+      categoryBarSwiper: null,
+      newsListSwiper: null,
+      style: {
+        titleBarHeight: 40,
+        categoryBarHeight: 36,
+      },
+    });
   },
   computed: {
     // news() {

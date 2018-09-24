@@ -10,7 +10,7 @@ Vue.use(Vuex);
  * @param setting
  * @return {*}
  */
-let createCommonSetting = setting => {
+let mergeStore = setting => {
   // 强制每个store使用命名空间
   setting.namespaced = true;
 
@@ -70,8 +70,8 @@ export default {
           },
           actions: {},
         },
-        index: createCommonSetting(require('../../../page/index/js/index.store.js').default),
-        detail: createCommonSetting(require('../../../page/detail/js/detail.store.js').default),
+        index: mergeStore(require('../../../page/index/js/index.store.js').default),
+        detail: mergeStore(require('../../../page/detail/js/detail.store.js').default),
         // all store above ..
       },
     });
